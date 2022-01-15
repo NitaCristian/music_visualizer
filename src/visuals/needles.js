@@ -15,7 +15,7 @@ function Needles() {
 	this.frequencyBins = ["bass", "lowMid", "highMid", "treble"];
 
 	//resize the plots sizes when the screen is resized.
-	this.onResize = function() {
+	this.onResize = function () {
 		this.pad = width / 20;
 		this.plotWidth = (width - this.pad) / this.plotsAcross;
 		this.plotHeight = (height - this.pad) / this.plotsDown;
@@ -25,7 +25,8 @@ function Needles() {
 	this.onResize();
 
 	// draw the plots to the screen
-	this.draw = function() {
+	this.draw = function () {
+		angleMode(RADIANS);
 		//create an array amplitude values from the fft.
 		var spectrum = fourier.analyze();
 		//iterator for selecting frequency bin.
@@ -64,7 +65,7 @@ function Needles() {
 	 *@param centreX: central x coordinate of the plot rectangle
 	 *@param bottomY: The bottom y coordinate of the plot rectangle
 	 */
-	this.needle = function(energy, centreX, bottomY) {
+	this.needle = function (energy, centreX, bottomY) {
 		push();
 		stroke('#333333');
 		//translate so 0 is at the bottom of the needle
@@ -85,7 +86,7 @@ function Needles() {
 	 *@param bottomY: The bottom y coordinate of the plot rectangle
 	 *@param freqLabel: Label denoting the frequency of the plot
 	 */
-	this.ticks = function(centreX, bottomY, freqLabel) {
+	this.ticks = function (centreX, bottomY, freqLabel) {
 		// 8 ticks from pi to 2pi
 		var nextTickAngle = minAngle;
 		push();
