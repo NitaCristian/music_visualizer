@@ -14,7 +14,7 @@ function Spectrum() {
 
 			let x = map(i, 0, spectrum.length, width / 2, width);
 			let y = height / 2;
-			let h = map(spectrum[i], 0, 255, 0, height / 5);
+			let h = map(spectrum[i], 0, 255, 0, height / 5) + 1;
 			let bar_width = width / spectrum.length;
 
 			if (h == 0) continue;

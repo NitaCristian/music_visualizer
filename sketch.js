@@ -8,7 +8,9 @@ var sound = null;
 var fourier;
 
 function preload() {
-	sound = loadSound('assets/stomper_reggae_bit.mp3');
+	// sound = loadSound('assets/stomper_reggae_bit.mp3');
+	sound = loadSound('assets/YACHT-The-Summer-Song-Instrumental.mp3');
+
 }
 
 function setup() {
@@ -24,7 +26,7 @@ function setup() {
 	vis.add(new Spectrum());
 	vis.add(new Equalizer());
 	vis.add(new Needles());
-
+	vis.add(new Mystify(10));
 }
 
 function draw() {
