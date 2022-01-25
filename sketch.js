@@ -23,6 +23,7 @@ function setup() {
 
 	//create a new visualisation container and add visualisations
 	vis = new Visualisations();
+	vis.add(new Radio());
 	vis.add(new Spectrum());
 	vis.add(new Equalizer());
 	vis.add(new Needles());
