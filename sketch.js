@@ -9,8 +9,8 @@ var fourier;
 
 function preload() {
 	// sound = loadSound('assets/stomper_reggae_bit.mp3');
-	sound = loadSound('assets/YACHT-The-Summer-Song-Instrumental.mp3');
-
+	// sound = loadSound('assets/YACHT-The-Summer-Song-Instrumental.mp3');
+	sound = loadSound('assets/persona_4_specialist.mp3');
 }
 
 function setup() {
@@ -49,7 +49,7 @@ function keyPressed() {
 //if the visualisation needs to be resized call its onResize method
 function windowResized() {
 	resizeCanvas(windowWidth, windowHeight);
-	if (vis.selectedVisual.hasOwnProperty('onResize')) {
+	if (vis.selectedVisual.hasOwnProperty('onResize') || vis.selectedVisual.__proto__.hasOwnProperty('onResize')) {
 		vis.selectedVisual.onResize();
 	}
 }
