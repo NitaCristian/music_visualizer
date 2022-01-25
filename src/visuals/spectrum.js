@@ -2,6 +2,7 @@ function Spectrum() {
 	this.name = "Spectrum";
 
 	this.draw = function () {
+		translate(-width / 2, -height / 2);
 		push();
 
 		let spectrum = fourier.analyze();
