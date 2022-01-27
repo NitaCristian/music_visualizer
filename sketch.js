@@ -9,8 +9,8 @@ var fourier;
 
 function preload() {
 	// sound = loadSound('assets/stomper_reggae_bit.mp3');
-	sound = loadSound('assets/YACHT-The-Summer-Song-Instrumental.mp3');
-	// sound = loadSound('assets/persona_4_specialist.mp3');
+	// sound = loadSound('assets/YACHT-The-Summer-Song-Instrumental.mp3');
+	sound = loadSound('assets/persona_4_specialist.mp3');
 }
 
 function setup() {
@@ -24,12 +24,12 @@ function setup() {
 	//create a new visualisation container and add visualisations
 	vis = new Visualisations();
 	vis.add(new Spectrum());
-	// vis.add(new Equalizer());
-	// vis.add(new Needles());
-	// vis.add(new Mystify(10));
+	vis.add(new Equalizer());
+	vis.add(new Needles());
+	vis.add(new Mystify(10));
 
-	// let myp5 = new p5(s);
-	// let threeD_canvas = select('#defaultCanvas1').hide();
+	let myp5 = new p5(s);
+	let threeD_canvas = select('#defaultCanvas1').hide();
 	// threeD_canvas.show();
 }
 
@@ -46,16 +46,16 @@ function mouseClicked() {
 }
 
 function keyPressed() {
-	// if (keyCode == 53) {
-	// 	select('#defaultCanvas0').hide()
-	// 	select('#defaultCanvas1').show()
-	// 	console.log(keyCode)
-	// }
-	// else {
-	// 	select('#defaultCanvas0').show()
-	// 	select('#defaultCanvas1').hide()
-	// 	console.log(keyCode)
-	// }
+	if (keyCode == 53) {
+		select('#defaultCanvas0').hide()
+		select('#defaultCanvas1').show()
+		console.log(keyCode)
+	}
+	else {
+		select('#defaultCanvas0').show()
+		select('#defaultCanvas1').hide()
+		console.log(keyCode)
+	}
 	controls.keyPressed(keyCode);
 }
 
