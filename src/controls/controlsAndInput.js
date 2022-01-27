@@ -36,14 +36,14 @@ function ControlsAndInput() {
 		fill("white");
 		stroke("black");
 		strokeWeight(2);
-		// textSize(34);
+		textSize(34);
 
 		//playback button 
 		this.playbackButton.draw();
 		//only draw the menu if menu displayed is set to true.
 		if (this.menuDisplayed) {
 
-			// text("Select a visualisation:", 100, 30);
+			text("Select a visualisation:", 100, 30);
 			this.menu();
 		}
 		pop();
