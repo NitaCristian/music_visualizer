@@ -7,7 +7,7 @@ function Spectrum() {
 		let spectrum = fourier.analyze();
 		noStroke();
 
-		for (let i = 0; i < spectrum.length; i += 5) {
+		for (let i = 0; i < spectrum.length; i += 6) {
 
 			let g = map(spectrum[i], 0, 255, 255, 0);
 			fill(spectrum[i], g, 0);
