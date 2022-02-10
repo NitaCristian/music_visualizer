@@ -4,26 +4,21 @@ function ControlsAndInput() {
 
 	this.menuDisplayed = false;
 	this.songsDisplayed = false;
-	//playback button displayed in the top left of the screen
+
 	this.playbackButton = new PlaybackButton();
-
 	this.videoBar = new VideoBar();
+	this.nextSong = new NextSong();
+	this.prevSong = new PreviousSong();
+	this.volumeIcon = new VolumeIcon();
 
-	this.nextprevSong = new NextPrevSong();
-
-	//make the window fullscreen or revert to windowed
 	this.mousePressed = function () {
-		// if (!this.playbackButton.hitCheck()) {
-		// 	var fs = fullscreen();
-		// 	fullscreen(!fs);
-		// }
 		this.playbackButton.hitCheck();
 		this.videoBar.hitCheck();
-		this.nextprevSong.hitCheck();
+		this.nextSong.hitCheck();
+		this.prevSong.hitCheck();
+		this.volumeIcon.hitCheck();
 	};
 
-	//responds to keyboard presses
-	//@param keycode the ascii code of the keypressed
 	this.keyPressed = function (keycode) {
 		if (keycode == 32) { // spacebar
 			if (sound.isPlaying()) {
@@ -43,8 +38,30 @@ function ControlsAndInput() {
 			return;
 		}
 
-		// 37 38 39 40 left up right down
-		// 72 h
+		if (keycode == 37) { // left arrow
+			sound.jump(sound.currentTime() - 5)
+			return;
+		}
+		if (keycode == 39) { // right arrow
+			sound.jump(sound.currentTime() + 5)
+			return;
+		}
+
+		if (keycode == 38) { // up arrow
+			volume = min(1.0, volume + 0.1)
+			sound.setVolume(volume)
+			return;
+		}
+		if (keycode == 40) { // down arrow
+			volume = max(0.0, volume - 0.1)
+			sound.setVolume(volume)
+			return;
+		}
+
+		if (keycode == 70) { // f
+			fullscreen(!fullscreen());
+			return;
+		}
 
 		if (keycode > 48 && keycode < 58) { // 1 - 9
 			let visNumber = keycode - 49;
@@ -61,15 +78,12 @@ function ControlsAndInput() {
 		stroke("black");
 		strokeWeight(2);
 
-		//playback button 
 		this.playbackButton.draw();
-
-		//video length bar
 		this.videoBar.draw();
+		this.nextSong.draw();
+		this.prevSong.draw();
+		this.volumeIcon.draw();
 
-		this.nextprevSong.draw();
-
-		//only draw the menu if menu displayed is set to true.
 		if (this.menuDisplayed) {
 			textSize(34);
 			text("Select a visualisation:", 100, 30);
@@ -84,7 +98,6 @@ function ControlsAndInput() {
 	};
 
 	this.menu = function () {
-		//draw out menu items for each visualisation
 		for (var i = 0; i < vis.visuals.length; i++) {
 			var yLoc = 70 + i * 40;
 			text((i + 1) + ":  " + vis.visuals[i].name, 100, yLoc);
@@ -93,7 +106,7 @@ function ControlsAndInput() {
 
 	this.showSongs = function () {
 		//draw out menu items for each visualisation
-		for (var i = 0; i < vis.visuals.length; i++) {
+		for (var i = 0; i < songList.length; i++) {
 			var yLoc = 70 + i * 40;
 			text((i + 1) + ":  " + songList[i], 600, yLoc);
 		}
@@ -101,6 +114,9 @@ function ControlsAndInput() {
 
 	this.onResize = function () {
 		this.videoBar.onResize();
-		this.playbackButton.onResize();
+		this.playbackButton.onResize(width / 2 - 10, height - 50, 20, 20);
+		this.nextSong.onResize(width / 2 + 60, height - 50, 20, 20);
+		this.prevSong.onResize(width / 2 - 80, height - 50, 20, 20);
+		this.volumeIcon.onresize();
 	}
 }

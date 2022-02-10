@@ -1,12 +1,10 @@
 //displays and handles clicks on the playback button.
-function PlaybackButton() {
+class PlaybackButton extends Button {
+	constructor() {
+		super(width / 2 - 10, height - 50, 20, 20)
+	}
 
-	this.width = 20;
-	this.height = 20;
-	this.x = width / 2 - 10;
-	this.y = height - 50;
-
-	this.draw = function () {
+	draw() {
 		ellipse(this.x + 10, this.y + 10, 60)
 
 		if (sound.isPlaying()) {
@@ -16,11 +14,9 @@ function PlaybackButton() {
 		else {
 			triangle(this.x, this.y, this.x + this.width, this.y + this.height / 2, this.x, this.y + this.height);
 		}
-	};
+	}
 
-	//checks for clicks on the button, starts or pauses playabck.
-	//@returns true if clicked false otherwise.
-	this.hitCheck = function () {
+	hitCheck() {
 		if (mouseX > this.x - 20 && mouseX < this.x + this.width + 20 && mouseY > this.y - 20 && mouseY < this.y + this.height + 20) {
 			if (sound.isPlaying()) {
 				sound.pause();
@@ -28,10 +24,5 @@ function PlaybackButton() {
 				sound.loop();
 			}
 		}
-	};
-
-	this.onResize = function () {
-		this.x = width / 2;
-		this.y = height - 2 * this.height;
-	};
+	}
 }
