@@ -7,14 +7,21 @@ var sound = null;
 //variable for p5 fast fourier transform
 var fourier;
 
+let songList = [
+	'mechanicus-children-of-the-omnissiah.mp3',
+	'persona_4_specialist.mp3',
+	'stomper_reggae_bit.mp3',
+	'YACHT-The-Summer-Song-Instrumental.mp3',
+];
+let songIndex = 0;
+
 function preload() {
-	// sound = loadSound('assets/stomper_reggae_bit.mp3');
-	// sound = loadSound('assets/YACHT-The-Summer-Song-Instrumental.mp3');
-	sound = loadSound('assets/persona_4_specialist.mp3');
+	sound = loadSound('assets/' + songList[songIndex]);
+	sound.setLoop(true);
 }
 
 function setup() {
-	createCanvas(windowWidth, windowHeight);
+	createCanvas(windowWidth - 4, windowHeight - 4);
 	background(0);
 	controls = new ControlsAndInput();
 
@@ -52,4 +59,5 @@ function windowResized() {
 	if (vis.selectedVisual.hasOwnProperty('onResize') || vis.selectedVisual.__proto__.hasOwnProperty('onResize')) {
 		vis.selectedVisual.onResize();
 	}
+	controls.onResize();
 }
