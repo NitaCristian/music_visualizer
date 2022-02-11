@@ -12,6 +12,7 @@ function ControlsAndInput() {
 	this.volumeIcon = new VolumeIcon();
 
 	this.mousePressed = function () {
+		return;
 		this.playbackButton.hitCheck();
 		this.videoBar.hitCheck();
 		this.nextSong.hitCheck();
@@ -20,6 +21,7 @@ function ControlsAndInput() {
 	};
 
 	this.keyPressed = function (keycode) {
+		return;
 		if (keycode == 32) { // spacebar
 			if (sound.isPlaying()) {
 				sound.pause();

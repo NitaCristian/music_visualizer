@@ -31,13 +31,19 @@ class Radio {
     }
 
     slider() {
-
+        // big rectangle
+        // horizontal needles 
+        // one red needle that goes left and right 
+        // some numbers at some needles
     }
     button() {
-
+        // circle
+        // maybe needles around it
+        // one red mark that spins
     }
     speaker() {
-
+        // just some grid 
+        // maybe rotate it for effect
     }
 
     dial() {

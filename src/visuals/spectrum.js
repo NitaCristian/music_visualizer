@@ -17,14 +17,10 @@ function Spectrum() {
 			let h = map(spectrum[i], 0, 255, 0, height / 5) + 1;
 			let bar_width = width / spectrum.length;
 
-			if (h == 0) continue;
-
-			// Right - top, bottom
-			rect(x, y, bar_width, -h);
-			rect(x, y, bar_width, h);
-			// Left - top, bottom>>
-			rect(width - x, y, bar_width, -h);
-			rect(width - x, y, bar_width, h);
+			// Right
+			rect(x, y - h, bar_width, 2 * h);
+			// Left 
+			rect(width - x, y - h, bar_width, 2 * h);
 		}
 		pop();
 
