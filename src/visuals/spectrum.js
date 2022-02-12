@@ -1,13 +1,14 @@
 function Spectrum() {
 	this.name = "Spectrum";
+	this.rain = new Rain();
 
 	this.draw = function () {
+		this.rain.draw();
 		push();
-
 		let spectrum = fourier.analyze();
 		noStroke();
 
-		for (let i = 0; i < spectrum.length; i += 6) {
+		for (let i = 0; i < spectrum.length; i += 5) {
 
 			let g = map(spectrum[i], 0, 255, 255, 0);
 			fill(spectrum[i], g, 0);

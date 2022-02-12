@@ -12,7 +12,7 @@ function ControlsAndInput() {
 	this.volumeIcon = new VolumeIcon();
 
 	this.mousePressed = function () {
-		return;
+		// return;
 		this.playbackButton.hitCheck();
 		this.videoBar.hitCheck();
 		this.nextSong.hitCheck();
@@ -21,7 +21,7 @@ function ControlsAndInput() {
 	};
 
 	this.keyPressed = function (keycode) {
-		return;
+		// return;
 		if (keycode == 32) { // spacebar
 			if (sound.isPlaying()) {
 				sound.pause();
@@ -75,6 +75,7 @@ function ControlsAndInput() {
 
 	//draws the playback button and potentially the menu
 	this.draw = function () {
+		// return;
 		push();
 		fill("white");
 		stroke("black");
@@ -115,6 +116,7 @@ function ControlsAndInput() {
 	}
 
 	this.onResize = function () {
+		// return;
 		this.videoBar.onResize();
 		this.playbackButton.onResize(width / 2 - 10, height - 50, 20, 20);
 		this.nextSong.onResize(width / 2 + 60, height - 50, 20, 20);

@@ -15,6 +15,8 @@ class NextSong extends Button {
             songIndex = (songIndex + 1) % songList.length
             sound.stop();
             sound = loadSound('assets/' + songList[songIndex]);
+            sound.setVolume(volume);
+
         }
     };
 

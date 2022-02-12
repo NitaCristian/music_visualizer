@@ -12,6 +12,9 @@ class Mystify {
         this.colors = [color(255, 0, 0), color(125, 125, 0), color(0, 255, 0), color(0, 125, 125), color(0, 0, 255), color(125, 0, 125)];
         this.current_index = 0;
         this.current_color = this.colors[0];
+
+        this.starField = new Starfield();
+        this.starField.emit(100);
     }
 
     setup(points) {
@@ -61,6 +64,8 @@ class Mystify {
     }
 
     draw() {
+        this.starField.draw();
+
         fourier.analyze();
         let energy = fourier.getEnergy("highMid");
 
