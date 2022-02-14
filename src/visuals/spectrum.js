@@ -4,10 +4,10 @@ function Spectrum() {
 
 	this.draw = function () {
 		this.rain.draw();
-		push();
-		let spectrum = fourier.analyze();
-		noStroke();
 
+		push();
+		noStroke();
+		let spectrum = fourier.analyze();
 		for (let i = 0; i < spectrum.length; i += 5) {
 
 			let g = map(spectrum[i], 0, 255, 255, 0);
@@ -24,6 +24,5 @@ function Spectrum() {
 			rect(width - x, y - h, bar_width, 2 * h);
 		}
 		pop();
-
 	};
 }

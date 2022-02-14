@@ -7,6 +7,7 @@ class Starfield {
     };
 
     emit(n) {
+        this.stars = [];
         for (let i = 0; i < n; i++) {
             this.stars[i] = new Star();
         }

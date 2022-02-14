@@ -14,8 +14,9 @@ class PreviousSong extends Button {
         if (mouseX > this.x - 20 && mouseX < this.x + this.width + 20 && mouseY > this.y - 20 && mouseY < this.y + this.height + 20) {
             songIndex = (songIndex + songList.length - 1) % songList.length
             sound.stop();
-            sound = loadSound('assets/' + songList[songIndex]);
+            sound = loadSound('assets/' + songList[songIndex], successCallback = loadPeaks);
             sound.setVolume(volume);
+
         }
     };
 }

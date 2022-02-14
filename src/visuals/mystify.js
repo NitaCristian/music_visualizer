@@ -5,7 +5,6 @@
 class Mystify {
     constructor(points) {
         this.name = "Mystify";
-        this.particles = [];
         this.setup(points);
 
         this.offset = 0;
@@ -18,6 +17,7 @@ class Mystify {
     }
 
     setup(points) {
+        this.particles = []
         for (let i = 0; i < points; i++) {
             this.particles.push(new Particle(random(200, width - 200), random(200, height - 200)));
         }
