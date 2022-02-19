@@ -1,4 +1,5 @@
 // comments, refactor, polish, videobar-hide, improve radio, performance, file structure, progress log, testing, improve all visuals, finish abstract, better resize
+// update helper classes such as star and drop to become particles, more comments to effects
 /** @var {!ControlsAndInput} controls Handles controls and input */
 let controls = null;
 
