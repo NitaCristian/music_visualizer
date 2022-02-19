@@ -12,16 +12,15 @@ function ControlsAndInput() {
 	this.volumeIcon = new VolumeIcon();
 
 	this.mousePressed = function () {
-		// return;
+		if (is3D) return;
 		this.playbackButton.hitCheck();
-		this.videoBar.hitCheck();
 		this.nextSong.hitCheck();
 		this.prevSong.hitCheck();
 		this.volumeIcon.hitCheck();
+		this.videoBar.hitCheck();
 	};
 
 	this.keyPressed = function (keycode) {
-		// return;
 		if (keycode == 32) { // spacebar
 			if (sound.isPlaying()) {
 				sound.pause();
@@ -31,14 +30,14 @@ function ControlsAndInput() {
 			return;
 		}
 
-		if (keycode == 17) { // ctrl
-			this.menuDisplayed = !this.menuDisplayed;
-			return;
-		}
-		if (keycode == 16) {// shift
-			this.songsDisplayed = !this.songsDisplayed;
-			return;
-		}
+		// if (keycode == 17) { // ctrl
+		// 	this.menuDisplayed = !this.menuDisplayed;
+		// 	return;
+		// }
+		// if (keycode == 16) {// shift
+		// 	this.songsDisplayed = !this.songsDisplayed;
+		// 	return;
+		// }
 
 		if (keycode == 37) { // left arrow
 			sound.jump(sound.currentTime() - 5)
@@ -65,17 +64,46 @@ function ControlsAndInput() {
 			return;
 		}
 
-		if (keycode > 48 && keycode < 58) { // 1 - 9
+		if (keycode == 78) { // n
+			songIndex = (songIndex + 1) % songList.length
+			sound.stop();
+			sound = loadSound('assets/' + songList[songIndex], successCallback = loadPeaks);
+			sound.setVolume(volume);
+			return;
+		}
+
+		if (keycode == 80) { // p
+			songIndex = (songIndex + songList.length - 1) % songList.length
+			sound.stop();
+			sound = loadSound('assets/' + songList[songIndex], successCallback = loadPeaks);
+			sound.setVolume(volume);
+			return;
+		}
+
+		if (keycode > 48 && keycode < 58) { // 1 - 9, 49 - 52, 53 - 54
 			let visNumber = keycode - 49;
-			if (visNumber < vis.visuals.length)
+			if (visNumber < vis.visuals.length) {
+				twoD_canvas.show()
+				threeD_canvas.hide()
 				vis.selectVisual(vis.visuals[visNumber].name);
+				is3D = false
+				return;
+			}
+			if (visNumber >= vis.visuals.length && visNumber - vis.visuals.length < myp5.vis.visuals.length) {
+				twoD_canvas.hide()
+				threeD_canvas.show()
+				myp5.vis.selectVisual(myp5.vis.visuals[visNumber - vis.visuals.length].name)
+				is3D = true
+				return;
+			}
 			return;
 		}
 	};
 
 	//draws the playback button and potentially the menu
 	this.draw = function () {
-		// return;
+		if (is3D) return;
+
 		push();
 		fill("white");
 		stroke("black");
@@ -116,7 +144,8 @@ function ControlsAndInput() {
 	}
 
 	this.onResize = function () {
-		// return;
+		if (is3D) return;
+
 		this.videoBar.onResize();
 		this.playbackButton.onResize(width / 2 - 10, height - 50, 20, 20);
 		this.nextSong.onResize(width / 2 + 60, height - 50, 20, 20);

@@ -5,6 +5,7 @@ function VideoBar() {
     this.height = 10
 
     this.draw = function () {
+        strokeWeight(0.8)
         let l = map(sound.currentTime(), 0, sound.duration(), this.x, this.width);
         if (sound.isPaused()) {
             l = map(sound._pauseTime, 0, sound.duration(), this.x, this.width)
@@ -13,7 +14,7 @@ function VideoBar() {
         rect(l, this.y, this.width - l, this.height, 10)
         fill('red')
         rect(this.x, this.y, l, this.height, 10)
-        ellipse(l + 10, this.y + 5, 15)
+        ellipse(l + 14, this.y + 5, 15)
     }
 
     this.hitCheck = function () {

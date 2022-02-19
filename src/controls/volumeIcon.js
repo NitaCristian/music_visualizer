@@ -16,6 +16,7 @@ class VolumeIcon {
             this.x + this.width, this.y + this.height);
         rect(this.x - 1, this.y + 4, this.width / 1.7, this.height / 1.7)
         textSize(15)
+        textAlign(LEFT)
         text(((volume.toFixed(1)) * 100 * !this.mute).toString(), this.x, this.y + 40)
         if (this.mute || volume == 0) {
             stroke('red')

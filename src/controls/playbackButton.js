@@ -5,6 +5,7 @@ class PlaybackButton extends Button {
 	}
 
 	draw() {
+		strokeWeight(1)
 		ellipse(this.x + 10, this.y + 10, 60)
 
 		if (sound.isPlaying()) {

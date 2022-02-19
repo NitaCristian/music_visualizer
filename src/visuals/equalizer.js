@@ -20,8 +20,8 @@ class Equalizer {
 		this.drawPeaks();
 
 		rotate(frameCount / 5);
-		this.drawEqualizer();
 		this.drawWaveForm();
+		this.drawEqualizer();
 
 		pop();
 	};
@@ -53,7 +53,7 @@ class Equalizer {
 	drawWaveForm() {
 		let spectrum = fourier.waveform();
 		beginShape();
-		for (let i = 0; i < spectrum.length - 100; i += 10) {
+		for (let i = 0; i < spectrum.length - 100; i += 15) {
 			let angle = map(i, 0, spectrum.length - 100, 0, 360);
 			let val = map(spectrum[i], -1, 1, 0, height)
 			let r = map(val, 0, 256, 80, 200);
