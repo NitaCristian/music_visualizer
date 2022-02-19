@@ -1,9 +1,15 @@
-// comments, refactor, polish, videobar-hide, improve radio, performance, file structure, progress log, testing, improve all visuals, finish abstract, better resize
-// update helper classes such as star and drop to become particles, more comments to effects
+// Polish everything
+// Improve radio, performance, file structure, all visuals, abstract
+// Refactor classes such as star and drop to become particles
+// Refactor the buttons (using callbacks), maybe also the video bar and the volume icon
+// Comments on: radio, mystify, equalizer(credit), star, particle, drop, emmitter, confetti, the buttons
+// Progress log, testing?, better resize
+
+
 /** @var {!ControlsAndInput} controls Handles controls and input */
 let controls = null;
 
-/** @var {Visualisations} vis Container to store visualisations in */
+/** @var {VisualisationsContainer} vis Container to store visualisations in */
 let vis = null;
 
 /** @var {p5.Sound} sound Hold the current soung */
@@ -71,7 +77,7 @@ function setup() {
 	peaks = sound.getPeaks();
 
 	// Create a new visualisations container and add visualisations
-	vis = new Visualisations();
+	vis = new VisualisationsContainer();
 	vis.add(new Spectrum());
 	vis.add(new Equalizer());
 	vis.add(new Radio());

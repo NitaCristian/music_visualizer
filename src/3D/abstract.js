@@ -1,10 +1,12 @@
-function Abstract(sketch) {
-    this.name = "Abstract";
-
-    this.draw = function () {
-        sketch.rotateX(90);
-        sketch.rotateZ(-90);
-        sketch.lights();
+class Abstract {
+    constructor(sketch) {
+        this.name = "Abstract";
+        this.sketch = sketch
+    }
+    draw = function () {
+        this.sketch.rotateX(90);
+        this.sketch.rotateZ(-90);
+        this.sketch.lights();
         let spectrum = fourier.analyze();
         //"bass", "lowMid", "highMid", "treble"
         let energy = fourier.getEnergy('lowMid');
@@ -18,11 +20,11 @@ function Abstract(sketch) {
 
 
     };
-    this.drawBox = function (x, y, size, energy) {
-        sketch.push()
-        sketch.translate(x, y);
-        sketch.rotateX(floor(energy / 10) * 10);
-        sketch.box(50);
-        sketch.pop()
+    drawBox = function (x, y, size, energy) {
+        this.sketch.push()
+        this.sketch.translate(x, y);
+        this.sketch.rotateX(floor(energy / 10) * 10);
+        this.sketch.box(50);
+        this.sketch.pop()
     }
 }

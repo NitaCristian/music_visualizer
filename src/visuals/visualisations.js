@@ -2,7 +2,7 @@
 /** 
  * @desc Container function for the visualisations
  */
-class Visualisations {
+class VisualisationsContainer {
 	constructor() {
 		/** @var {Array} visuals Array to store visualisations*/
 		this.visuals = [];

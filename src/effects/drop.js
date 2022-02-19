@@ -1,14 +1,14 @@
 // Need to modify
-function Drop() {
-    this.x = random(width);
-    this.y = random(-500, -50);
-    this.z = random(0, 20);
-    this.len = map(this.z, 0, 20, 5, 10);
-    this.yspeed = map(this.z, 0, 20, 1, 20);
-
-    this.xspeed = map(this.z, 0, 20, 1, 20); // new
-
-    this.fall = function () {
+class Drop {
+    constructor() {
+        this.x = random(width);
+        this.y = random(-500, -50);
+        this.z = random(0, 20);
+        this.len = map(this.z, 0, 20, 5, 10);
+        this.yspeed = map(this.z, 0, 20, 1, 20);
+        this.xspeed = map(this.z, 0, 20, 1, 20); // new
+    }
+    fall() {
         this.x = this.x + this.xspeed // new
 
         this.y = this.y + this.yspeed;
@@ -26,7 +26,7 @@ function Drop() {
         }
     }
 
-    this.show = function () {
+    show() {
         var thick = map(this.z, 0, 20, 1, 3);
         strokeWeight(thick);
         // stroke(138, 43, 226);

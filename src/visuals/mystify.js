@@ -13,7 +13,7 @@ class Mystify {
         this.current_color = this.colors[0];
 
         this.starField = new Starfield();
-        this.starField.emit(100);
+        this.starField.set(100);
     }
 
     setup(points) {

@@ -4,7 +4,7 @@ const s = (sketch) => {
     sketch.setup = function () {
         sketch.createCanvas(windowWidth, windowHeight, WEBGL)
 
-        sketch.vis = new Visualisations();
+        sketch.vis = new VisualisationsContainer();
         sketch.vis.add(new Abstract(sketch))
         sketch.vis.add(new PixelatedWaves(sketch))
 
