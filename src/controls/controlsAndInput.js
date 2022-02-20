@@ -5,30 +5,37 @@ class ControlsAndInput {
 	constructor() {
 		/** @var {Boolean} Flag to determine is the visuals list should be shown*/
 		this.visualsDisplayed = false;
+
 		/** @var {Boolean} Flag to determine is the song list should be shown*/
 		this.songsDisplayed = false;
+
 		/** @var {PlaybackButton} Button to play or pause current song*/
-		this.playbackButton = new PlaybackButton();
+		this.playbackButton = new PlaybackButton(width / 2 - 10, height - 50, 20, 20);
+
 		/** @var {VideoBar} Horisontal bar to show the length of the song and jump to specific time*/
 		this.videoBar = new VideoBar();
+
 		/** @var {NextSong} Button to change to the next song*/
-		this.nextSong = new NextSong();
+		this.nextSong = new NextSong(width / 2 + 60, height - 50, 20, 20);
+
 		/** @var {PreviousSong} Button to change to the previous song*/
-		this.prevSong = new PreviousSong();
+		this.prevSong = new PreviousSong(width / 2 - 80, height - 50, 20, 20);
+
 		/** @var {volumeIcon} Button to show the volume of the song and mute on press*/
-		this.volumeIcon = new VolumeIcon();
+		this.volumeIcon = new VolumeIcon(width / 2 + 120, height - 50, 20, 20);
 	}
 	/** 
 	 * @desc Handle the mouse pressed on canvas action. All actions are disabled if the 3D canvas is shown
 	 */
 	mousePressed() {
 		if (is3D) return;
-		this.playbackButton.hitCheck();
-		this.nextSong.hitCheck();
-		this.prevSong.hitCheck();
-		this.volumeIcon.hitCheck();
+
+		this.playbackButton.hitCheck(this.playPause);
+		this.nextSong.hitCheck(this.changeSong, (songIndex + 1) % songList.length);
+		this.prevSong.hitCheck(this.changeSong, (songIndex + songList.length - 1) % songList.length);
+		this.volumeIcon.hitCheck(this.muteAudio);
 		this.videoBar.hitCheck();
-	};
+	}; class
 	/** 
 	 * @desc Handle key pressed action.
 	 * 
@@ -37,11 +44,7 @@ class ControlsAndInput {
 	keyPressed(keycode) {
 		// SPACEBAR - Play or Pause the song
 		if (keycode == 32) {
-			if (sound.isPlaying()) {
-				sound.pause();
-			} else {
-				sound.loop();
-			}
+			this.playPause()
 			return
 		}
 		// LEFT ARROW - Skip 5 seconds backwards
@@ -83,25 +86,19 @@ class ControlsAndInput {
 		}
 		// M - Mute audio
 		if (keycode == 77) {
-			if (volume == 0) return;
-			this.volumeIcon.mute = !this.volumeIcon.mute
-			if (this.volumeIcon.mute) {
-				sound.setVolume(0);
-				return;
-			}
-			sound.setVolume(volume);
+			this.muteAudio()
 			return
 		}
 		// N - Change to the next song
 		if (keycode == 78) {
-			songIndex = (songIndex + 1) % songList.length
-			this.changeSong(songIndex)
+			let newIndex = (songIndex + 1) % songList.length
+			this.changeSong(newIndex)
 			return;
 		}
 		// P - Change to the previous song
 		if (keycode == 80) {
-			songIndex = (songIndex + songList.length - 1) % songList.length
-			this.changeSong(songIndex)
+			let newIndex = (songIndex + songList.length - 1) % songList.length
+			this.changeSong(newIndex)
 			return;
 		}
 		// V - List visualisations
@@ -126,6 +123,28 @@ class ControlsAndInput {
 		}
 	};
 	/** 
+	 * @desc Play or Pause the current audio
+	 */
+	playPause() {
+		if (sound.isPlaying()) {
+			sound.pause();
+		} else {
+			sound.loop();
+		}
+	}
+	/** 
+	 * @desc Mute or Unmute the current audio
+	 */
+	muteAudio() {
+		if (volume == 0) return;
+		mute = !mute
+		if (mute) {
+			sound.setVolume(0);
+			return;
+		}
+		sound.setVolume(volume);
+	}
+	/** 
 	 * @desc Handles the change of a visualisation and showing the appropriate canvas
 	 * 
 	 * @param {visualsContainer} visualsContainer The container that holds the visualisation that will be shown
@@ -145,9 +164,10 @@ class ControlsAndInput {
 	 * 
 	 * @param {Number} index Index of the new song 
 	 */
-	changeSong(index) {
+	changeSong(newIndex) {
+		songIndex = newIndex
 		sound.stop();
-		sound = loadSound('assets/' + songList[index], successCallback = loadPeaks);
+		sound = loadSound('assets/' + songList[songIndex], successCallback = loadPeaks);
 		sound.setVolume(volume);
 	}
 	/** 
@@ -209,6 +229,6 @@ class ControlsAndInput {
 		this.playbackButton.onResize(width / 2 - 10, height - 50, 20, 20);
 		this.nextSong.onResize(width / 2 + 60, height - 50, 20, 20);
 		this.prevSong.onResize(width / 2 - 80, height - 50, 20, 20);
-		this.volumeIcon.onresize();
+		this.volumeIcon.onResize(width / 2 + 120, height - 50, 20, 20);
 	}
 }

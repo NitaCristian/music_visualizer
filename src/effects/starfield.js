@@ -5,9 +5,9 @@
  */
 class Starfield {
     constructor() {
-        /** @var {Array} stars List of all stars that will be drawn*/
+        /** @var {Array}  List of all stars that will be drawn*/
         this.stars = [];
-        /** @var {Number} speed Speed at which the stars move*/
+        /** @var {Number}  Speed at which the stars move*/
         this.speed = 50;
     };
 

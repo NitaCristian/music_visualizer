@@ -7,7 +7,7 @@
  */
 class Equalizer {
 	constructor() {
-		/** @var {String} name Name of the current visualisation*/
+		/** @var {String}  Name of the current visualisation*/
 		this.name = "Circle Equalizer";
 	}
 

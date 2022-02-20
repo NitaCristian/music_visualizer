@@ -1,22 +1,15 @@
+/** 
+ * @desc Class to add a button which switches to the previous song
+ */
 class PreviousSong extends Button {
-    constructor() {
-        super(width / 2 - 80, height - 50, 20, 20)
+    constructor(x, y, w, h) {
+        super(x, y, w, h)
     }
 
     draw() {
-        fill('white')
-        circle(this.x + 10, this.y + 10, 60)
-        triangle(this.x + this.width, this.y, this.x, this.y + this.height / 2, this.x + this.width, this.y + this.height);
-        triangle(this.x + this.width - 10, this.y, this.x - 10, this.y + this.height / 2, this.x + this.width - 10, this.y + this.height);
+        super.draw()
+
+        triangle(this.x + this.w, this.y, this.x, this.y + this.h / 2, this.x + this.w, this.y + this.h);
+        triangle(this.x + this.w - 10, this.y, this.x - 10, this.y + this.h / 2, this.x + this.w - 10, this.y + this.h);
     }
-
-    hitCheck() {
-        if (mouseX > this.x - 20 && mouseX < this.x + this.width + 20 && mouseY > this.y - 20 && mouseY < this.y + this.height + 20) {
-            songIndex = (songIndex + songList.length - 1) % songList.length
-            sound.stop();
-            sound = loadSound('assets/' + songList[songIndex], successCallback = loadPeaks);
-            sound.setVolume(volume);
-
-        }
-    };
 }

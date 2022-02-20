@@ -5,7 +5,7 @@
  */
 class Rain {
     constructor() {
-        /** @var {Array} drops Array to hold droplets of water that will be drawn*/
+        /** @var {Array}  Array to hold droplets of water that will be drawn*/
         this.drops = []
         // Call the helper function to drop 30 droplets
         this.drop(30);

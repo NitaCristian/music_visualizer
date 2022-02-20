@@ -4,10 +4,10 @@
  */
 class VisualisationsContainer {
 	constructor() {
-		/** @var {Array} visuals Array to store visualisations*/
+		/** @var {Array}  Array to store visualisations*/
 		this.visuals = [];
 
-		/** @var {Visualisation} selectedVisual Currently selected vis. set to null until vis loaded in */
+		/** @var {Visualisation}  Currently selected vis. set to null until vis loaded in */
 		this.selectedVisual = null;
 	}
 	/** 

@@ -4,9 +4,9 @@
  */
 class Spectrum {
 	constructor() {
-		/** @var {String} name Name of the visualisation*/
+		/** @var {String}  Name of the visualisation*/
 		this.name = "Spectrum";
-		/** @var {Rain} rain Rain object which renders droples falling on the screen*/
+		/** @var {Rain}  Rain object which renders droples falling on the screen*/
 		this.rain = new Rain();
 	}
 	draw() {

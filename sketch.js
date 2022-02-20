@@ -6,22 +6,22 @@
 // Progress log, testing?, better resize
 
 
-/** @var {!ControlsAndInput} controls Handles controls and input */
+/** @var {!ControlsAndInput}  Handles controls and input */
 let controls = null;
 
-/** @var {VisualisationsContainer} vis Container to store visualisations in */
+/** @var {VisualisationsContainer}  Container to store visualisations in */
 let vis = null;
 
-/** @var {p5.Sound} sound Hold the current soung */
+/** @var {p5.Sound}  Hold the current soung */
 let sound = null;
 
-/** @var {p5.FFT} fourier Object to analyze the song */
+/** @var {p5.FFT}  Object to analyze the song */
 let fourier;
 
-/** @var {number} volume Volume of the song*/
+/** @var {number}  Volume of the song*/
 let volume = 0.2;
 
-/** @var {Array} songList List of all songs available*/
+/** @var {Array}  List of all songs available*/
 let songList = [
 	'songname.mp3',
 	'INNA_Gimme_Gimme.mp3',
@@ -35,23 +35,26 @@ let songList = [
 	'Persona-5-Last-Surprise.mp3'
 ];
 
-/** @var {number} songIndex Index of the current loaded song from the songList array*/
+/** @var {number}  Index of the current loaded song from the songList array*/
 let songIndex = 0;
 
-/** @var {Array} peaks Array of amplitude peaks in a p5.SoundFile*/
+/** @var {Array}  Array of amplitude peaks in a p5.SoundFile*/
 let peaks;
 
-/** @var {type} name desc*/
+/** @var {type}  Represents a second instance of p5 where the canvas is 3D*/
 let myp5;
 
-/** @var {type} name desc*/
+/** @var {p5.Element}  Is a p5.Element which holds the 2D canvas*/
 let twoD_canvas;
 
-/** @var {type} name desc*/
+/** @var {p5.Element}  Is a p5.Element which holds the 3D canvas*/
 let threeD_canvas;
 
-/** @var {Bool} is3D Flag to tell if the current visualization is 3D */
+/** @var {Bool} Flag to tell if the current visualization is 3D */
 let is3D = false;
+
+/** @var {Boolean} flag to keep track of whether the audio is muted*/
+let mute = false;
 
 function preload() {
 	sound = loadSound('assets/' + songList[songIndex], successCallback = loadPeaks);
@@ -115,29 +118,3 @@ function windowResized() {
 		vis.selectedVisual.onResize();
 	}
 }
-
-
-
-//Function Documentation
-/**
- * @desc {short description}
- *
- * @param {type} {name} short description
- * @returns {type} short description
- */
-
-// Class Documentation
-/**
- * @desc {short description}
- *
- * @implements {class}
- */
-
-// Constructor
-/**
- * @param {type} name {short description}
- */
-
-// Class field and Variable
-/** @private @const {type} {short description} */
-/** @var {type} {short description} */
