@@ -8,7 +8,7 @@ class Rain {
         /** @var {Array}  Array to hold droplets of water that will be drawn*/
         this.drops = []
         // Call the helper function to drop 30 droplets
-        this.drop(30);
+        this.drop(50);
     }
 
     /** 
@@ -25,11 +25,13 @@ class Rain {
     draw() {
         push();
         // For every drop in the drops array
-        for (let i = 0; i < this.drops.length; i++) {
+        for (let drop of this.drops) {
             // Update each droplet's position
-            this.drops[i].fall();
+            drop.update();
+            // If a drop is out of bounds bring it back
+            drop.edges();
             // Draw the droplet onto the screen
-            this.drops[i].show();
+            drop.show();
         }
         pop();
     }

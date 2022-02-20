@@ -10,10 +10,10 @@ class Spectrum {
 		this.rain = new Rain();
 	}
 	draw() {
+		push();
 		// Draw the rain on the screen
 		this.rain.draw();
 
-		push();
 		noStroke();
 		let spectrum = fourier.analyze();
 		for (let i = 0; i < spectrum.length; i += 5) {

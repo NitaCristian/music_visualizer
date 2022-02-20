@@ -16,13 +16,7 @@ class Emitter {
    */
   emit(num) {
     for (let i = 0; i < num; i++) {
-      // 50/50 chance of a round particle or a square particle
-      if (random(1) < 0.5) {
-        this.particles.push(new Particle(this.pos.x, this.pos.y));
-      }
-      else {
-        this.particles.push(new Confetti(this.pos.x, this.pos.y));
-      }
+      this.particles.push(new Confetti(this.pos.x, this.pos.y));
     }
   }
   /** 
@@ -32,7 +26,7 @@ class Emitter {
     // for every particle
     for (let particle of this.particles) {
       // apply gravity and update
-      let gravity = createVector(0, 0.2);
+      let gravity = createVector(random(-1, 1), 0.01);
       particle.applyForce(gravity);
       particle.update();
     }

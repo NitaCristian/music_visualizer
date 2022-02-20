@@ -9,12 +9,11 @@ class Equalizer {
 	constructor() {
 		/** @var {String}  Name of the current visualisation*/
 		this.name = "Circle Equalizer";
+		this.emi = new Emitter(0, 0)
 	}
 
 	draw() {
 		push();
-		noFill();
-		stroke(255);
 
 		angleMode(DEGREES);
 		// Translate the 0,0 coordinate to the center of the canvas
@@ -22,14 +21,26 @@ class Equalizer {
 		// Translate the 0,0 coordinate in a circle path using the cos() and sin() functions
 		translate(cos(frameCount) * 50, sin(frameCount) * 30);
 
+		if (frameCount % 10)
+			this.emi.emit(1)
+		this.emi.update()
+		this.emi.show()
+
+		// Draw a base circle
+		fill(0)
+		circle(0, 0, 200, 200)
+
+		stroke(255);
+		// Rotate clockwise
+		rotate(frameCount / 5);
+		this.drawWaveForm();
+		noFill();
+		this.drawEqualizer();
+
 		// Rotate counter-clockwise
 		rotate(-frameCount / 5);
 		this.drawPeaks();
 
-		// Rotate clockwise
-		rotate(frameCount / 5);
-		this.drawWaveForm();
-		this.drawEqualizer();
 
 		pop();
 	};
@@ -67,11 +78,11 @@ class Equalizer {
 			line(x, y, cos(angle) * 100, sin(angle) * 100)
 		}
 		endShape(CLOSE);
-		// Draw a base circle
-		circle(0, 0, 200, 200)
+
 	}
 
 	drawWaveForm() {
+		fill(0)
 		let spectrum = fourier.waveform();
 		beginShape();
 		// For every amplitude

@@ -1,14 +1,11 @@
 // Credit to Coding Train: https://thecodingtrain.com/learning/nature-of-code/4.1-particle-system-simulation.html
 
-
 class Particle extends p5.Vector {
   constructor(x, y) {
     super(x, y);
-    this.vel = p5.Vector.random2D();
-    this.vel.mult(random(-2, 2));
+    this.vel = createVector(0, 0);
     this.acc = createVector(0, 0);
     this.r = 8;
-    this.lifetime = 255;
   }
 
   applyForce(force) {
@@ -49,11 +46,8 @@ class Particle extends p5.Vector {
 
   update() {
     this.vel.add(this.acc);
-    // this.vel.limit(10);
     this.add(this.vel);
     this.acc.set(0, 0);
-
-    this.lifetime -= 5;
   }
 
   show() {

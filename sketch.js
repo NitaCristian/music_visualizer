@@ -1,12 +1,11 @@
 // Polish everything
 // Improve radio, performance, file structure, all visuals, abstract
 // Refactor classes such as star and drop to become particles
-// Refactor the buttons (using callbacks), maybe also the video bar and the volume icon
-// Comments on: radio, mystify, equalizer(credit), star, particle, drop, emmitter, confetti, the buttons
+// Comments on: radio, mystify, equalizer(credit), more credits, star, particle, drop, 
 // Progress log, testing?, better resize
 
 
-/** @var {!ControlsAndInput}  Handles controls and input */
+/** @var {ControlsAndInput}  Handles controls and input */
 let controls = null;
 
 /** @var {VisualisationsContainer}  Container to store visualisations in */

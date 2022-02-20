@@ -28,11 +28,11 @@ class Starfield {
         // Translate the 0,0 origin to the center of the canvas
         translate(width / 2, height / 2);
         // For every star in the stars array
-        for (let i = 0; i < this.stars.length; i++) {
+        for (let star of this.stars) {
             // Update each star's new position
-            this.stars[i].update(this.speed);
+            star.update(this.speed);
             // Draw the star to the screen
-            this.stars[i].show();
+            star.show();
         }
         pop();
     }
