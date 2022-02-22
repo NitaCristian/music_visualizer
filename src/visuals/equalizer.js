@@ -7,26 +7,28 @@
  */
 class Equalizer {
 	constructor() {
-		/** @var {String}  Name of the current visualisation*/
+		/** @var {String} Name of the current visualisation*/
 		this.name = "Circle Equalizer";
-		this.emi = new Emitter(0, 0)
+
+		/** @var {Emitter} Emitter object which emitts a shower of particles*/
+		this.emitter = new Emitter(0, 0)
 	}
 
 	draw() {
-		push();
+		opacity = 180
 
+		push();
 		angleMode(DEGREES);
 		// Translate the 0,0 coordinate to the center of the canvas
 		translate(width / 2, height / 2);
 		// Translate the 0,0 coordinate in a circle path using the cos() and sin() functions
 		translate(cos(frameCount) * 50, sin(frameCount) * 30);
 
-		if (frameCount % 10)
-			this.emi.emit(1)
-		this.emi.update()
-		this.emi.show()
+		// Add, update and show particle
+		if (frameCount % 10) this.emitter.emit(1)
+		this.emitter.show()
 
-		// Draw a base circle
+		// Draw a circle
 		fill(0)
 		circle(0, 0, 200, 200)
 
@@ -40,7 +42,6 @@ class Equalizer {
 		// Rotate counter-clockwise
 		rotate(-frameCount / 5);
 		this.drawPeaks();
-
 
 		pop();
 	};

@@ -6,6 +6,7 @@ class VolumeIcon extends Button {
     constructor(x, y, w, h) {
         super(x, y, w, h)
     }
+
     /** 
      * @desc Function which draws the icon to the canvas
      */

@@ -5,6 +5,7 @@ class Button {
     constructor(x, y, w, h) {
         this.onResize(x, y, w, h)
     }
+
     /** 
      * @desc Function do draw a basic button 
      */
@@ -13,6 +14,7 @@ class Button {
         fill('white')
         ellipse(this.x + 10, this.y + 10, 60)
     }
+
     /** 
      * @desc Function to call another function when the button is pressed
      * @param {Function} callback This is a function passed as a parameter
@@ -23,6 +25,7 @@ class Button {
             callback(param)
         }
     }
+
     /** 
      * @desc Function called to resize the button dimensions when the canvas resizes
      * @param {Number} x new value of the x coordinate
@@ -33,10 +36,13 @@ class Button {
     onResize(x, y, w, h) {
         /** @var {Number} width of the volume icon*/
         this.w = w
+
         /** @var {Number} height of the volume icon*/
         this.h = h
+
         /** @var {Number} x coordinate of the volume icon*/
         this.x = x
+
         /** @var {Number} y coordinate of the volume icon*/
         this.y = y
     };

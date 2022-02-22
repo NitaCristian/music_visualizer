@@ -5,15 +5,15 @@
  */
 class Starfield {
     constructor() {
-        /** @var {Array}  List of all stars that will be drawn*/
+        /** @var {Array} Array all stars */
         this.stars = [];
-        /** @var {Number}  Speed at which the stars move*/
+
+        /** @var {Number} Speed at which the stars move*/
         this.speed = 50;
     };
 
     /** 
      * @desc Set the amount of stars that will be displayed on the screen
-     * 
      * @param {Number} n Number of stars to be added 
      */
     set(n) {

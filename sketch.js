@@ -1,27 +1,34 @@
-// Polish everything
-// Improve radio, performance, file structure, all visuals, abstract
-// Refactor classes such as star and drop to become particles
-// Comments on: radio, mystify, equalizer(credit), more credits, star, particle, drop, 
-// Progress log, testing?, better resize
-
-
-/** @var {ControlsAndInput}  Handles controls and input */
+// Polish everything, better resize
+// Improve radio,file structure, all visuals
+// Comments on: radio, mystify, equalizer(credit), more credits, 
+// Progress log, testing?, 
+// hide HUD
+// better comments
+// better pix waves, add some background
+// radio
+// refactor for performance
+// refactor particle
+// drag and drop song
+// changin vis bug error to pix waves
+// make rain and remove drop when out of bounds
+/** @var {ControlsAndInput} Handles controls and input from the user */
 let controls = null;
 
-/** @var {VisualisationsContainer}  Container to store visualisations in */
-let vis = null;
+/** @var {VisualisationsContainer} Container to store visualisations in */
+let visContainer = null;
 
-/** @var {p5.Sound}  Hold the current soung */
-let sound = null;
+/** @var {p5.Sound} Store the current song */
+let song = null;
 
-/** @var {p5.FFT}  Object to analyze the song */
-let fourier;
+/** @var {p5.FFT} Object to analyze the song */
+let fourier = null;
 
-/** @var {number}  Volume of the song*/
+/** @var {number} Default volume of the song*/
 let volume = 0.2;
 
-/** @var {Array}  List of all songs available*/
+/** @var {Array} List of all songs available*/
 let songList = [
+	'Persona-5-Last-Surprise.mp3',
 	'songname.mp3',
 	'INNA_Gimme_Gimme.mp3',
 	'YACHT-The-Summer-Song-Instrumental.mp3',
@@ -31,59 +38,59 @@ let songList = [
 	'persona_4_specialist.mp3',
 	'i_secretly_love_u.mp3',
 	'stomper_reggae_bit.mp3',
-	'Persona-5-Last-Surprise.mp3'
 ];
 
-/** @var {number}  Index of the current loaded song from the songList array*/
+/** @var {Number} Index of the song from the songList array*/
 let songIndex = 0;
 
-/** @var {Array}  Array of amplitude peaks in a p5.SoundFile*/
-let peaks;
+/** @var {Array} Array of amplitude peaks of the song*/
+let peaks = [];
 
 /** @var {type}  Represents a second instance of p5 where the canvas is 3D*/
-let myp5;
+let myp5 = null;
 
-/** @var {p5.Element}  Is a p5.Element which holds the 2D canvas*/
+/** @var {p5.Element} p5.Element which holds the 2D canvas*/
 let twoD_canvas;
 
-/** @var {p5.Element}  Is a p5.Element which holds the 3D canvas*/
+/** @var {p5.Element} p5.Element which holds the 3D canvas*/
 let threeD_canvas;
 
-/** @var {Bool} Flag to tell if the current visualization is 3D */
+/** @var {Boolean} Flag to tell if the current visualization is 3D */
 let is3D = false;
 
-/** @var {Boolean} flag to keep track of whether the audio is muted*/
+/** @var {Boolean} Flag to keep track of whether the audio is muted*/
 let mute = false;
 
+/** @var {Number} Opacity set by every visualisation*/
+let opacity = 255
+
 function preload() {
-	sound = loadSound('assets/' + songList[songIndex], successCallback = loadPeaks);
-	sound.setVolume(volume);
+	song = loadSound('assets/' + songList[songIndex], successCallback = loadPeaks);
+	song.setVolume(volume);
 }
 
 /**
- * @desc Callback function called after a soung is loaded
- * 
- * @returns {Array} Returns and array of amplitude peaks
+ * @desc Callback function called after a song is loaded
+ * @returns {Array} Returns an array of amplitude peaks
  */
 function loadPeaks() {
-	peaks = sound.getPeaks();
+	peaks = song.getPeaks();
 }
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 
 	controls = new ControlsAndInput();
-
 	// Instantiate the FFT object
 	fourier = new p5.FFT();
-	peaks = sound.getPeaks();
+	peaks = song.getPeaks(); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Is this necessary??????????
 
 	// Create a new visualisations container and add visualisations
-	vis = new VisualisationsContainer();
-	vis.add(new Spectrum());
-	vis.add(new Equalizer());
-	vis.add(new Radio());
-	vis.add(new Mystify(10));
+	visContainer = new VisualisationsContainer();
+	visContainer.add(new Spectrum());
+	visContainer.add(new Equalizer());
+	visContainer.add(new Radio());
+	visContainer.add(new Mystify());
 
 	// Create a new instance of p5 for the 3D visualizations
 	myp5 = new p5(s);
@@ -93,15 +100,19 @@ function setup() {
 }
 
 function draw() {
-	background(0);
+	background(0, opacity);
 	// Draw the selected visualisation
-	vis.selectedVisual.draw();
+	visContainer.selectedVisual.draw();
 	// Draw the controls
 	controls.draw();
 }
 
 function mouseClicked() {
 	controls.mousePressed();
+}
+
+function mouseMoved() {
+	controls.mouseMoved();
 }
 
 function keyPressed() {
@@ -113,7 +124,7 @@ function windowResized() {
 	// Resize the controls
 	controls.onResize();
 	// Resize any visualisation that needs resize
-	if (vis.selectedVisual.hasOwnProperty('onResize') || vis.selectedVisual.__proto__.hasOwnProperty('onResize')) {
-		vis.selectedVisual.onResize();
+	if (visContainer.selectedVisual.hasOwnProperty('onResize') || visContainer.selectedVisual.__proto__.hasOwnProperty('onResize')) {
+		visContainer.selectedVisual.onResize();
 	}
 }

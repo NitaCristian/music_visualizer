@@ -5,15 +5,12 @@
  */
 class Rain {
     constructor() {
-        /** @var {Array}  Array to hold droplets of water that will be drawn*/
+        /** @var {Array} Array to store the droplets*/
         this.drops = []
-        // Call the helper function to drop 30 droplets
-        this.drop(50);
     }
 
     /** 
      * @desc Function to set the number of drops
-     * 
      * @param {Number} n Number of drops to be added to the drops array
      */
     drop(n) {
@@ -22,6 +19,7 @@ class Rain {
             this.drops[i] = new Drop();
         }
     }
+
     draw() {
         push();
         // For every drop in the drops array
@@ -33,6 +31,11 @@ class Rain {
             // Draw the droplet onto the screen
             drop.show();
         }
+        // for (let i = this.drops.length - 1; i >= 0; i--) {
+        //     if (this.drops[i].outOfBounds()) {
+        //         this.drops.splice(i, 1)
+        //     }
+        // }
         pop();
     }
 }

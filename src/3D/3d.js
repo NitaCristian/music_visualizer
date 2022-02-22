@@ -1,30 +1,27 @@
 const s = (sketch) => {
-    sketch.vis = null
+    sketch.visContainer = null
 
     sketch.setup = function () {
         sketch.createCanvas(windowWidth, windowHeight, WEBGL)
 
-        sketch.vis = new VisualisationsContainer();
-        sketch.vis.add(new Abstract(sketch))
-        sketch.vis.add(new PixelatedWaves(sketch))
+        sketch.visContainer = new VisualisationsContainer();
+        sketch.visContainer.add(new PixelatedWaves(sketch))
 
         sketch.angleMode(DEGREES);
-        sketch.debugMode();
 
-        sketch.camera(1300, -300, 0, 0, 0, 0)
+        sketch.camera(0, -400, 500, 0, -200, 0)
         sketch.noStroke();
         sketch.normalMaterial();
     };
 
     sketch.draw = function () {
         sketch.background(100);
-        sketch.vis.selectedVisual.draw(sketch);
+        sketch.visContainer.selectedVisual.draw(sketch);
         sketch.orbitControl(1, 1);
     };
 
     sketch.windowResized = function () {
         sketch.resizeCanvas(windowWidth, windowHeight)
-        sketch.camera(1300, -300, 0, 0, 0, 0)
-
+        sketch.camera(0, -400, 500, 0, -200, 0)
     }
 }

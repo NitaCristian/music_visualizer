@@ -9,7 +9,7 @@ class PlaybackButton extends Button {
 	draw() {
 		super.draw()
 
-		if (sound.isPlaying()) {
+		if (song.isPlaying()) {
 			rect(this.x, this.y, this.w / 2 - 2, this.h);
 			rect(this.x + (this.w / 2 + 2), this.y, this.w / 2 - 2, this.h);
 		}

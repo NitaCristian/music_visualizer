@@ -17,6 +17,7 @@ class Radio {
 
     draw() {
         background('SaddleBrown')
+        opacity = 255
         let spectrum = fourier.analyze();
 
         this.slider(100, height - 900, 850, 200)
