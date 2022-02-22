@@ -1,16 +1,18 @@
+//////////////////////////////////////////////////////////////////////////////////////////
 // Credit to Coding Train: https://thecodingtrain.com/CodingChallenges/004-purplerain.html
+//////////////////////////////////////////////////////////////////////////////////////////
 
 /** 
- * @desc Rain Class used to render droplets fallin to the screen
+ * Rain Class used to render droplets fallin to the screen
  */
 class Rain {
     constructor() {
-        /** @var {Array} Array to store the droplets*/
+        /** Array to store the droplets*/
         this.drops = []
     }
 
     /** 
-     * @desc Function to set the number of drops
+     * Function to set the number of drops
      * @param {Number} n Number of drops to be added to the drops array
      */
     drop(n) {

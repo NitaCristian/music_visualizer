@@ -1,24 +1,27 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Credit to Coding Train: https://thecodingtrain.com/learning/nature-of-code/4.1-particle-system-simulation.html
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 /** 
- * @desc Particle Class to create particles
+ * Particle Class to create particles
  */
 class Particle extends p5.Vector {
   constructor(x, y) {
     super(x, y);
 
-    /** @var {p5.Vector} Velocity of the particle*/
+    /** Velocity of the particle*/
     this.vel = createVector(0, 0);
 
-    /** @var {p5.Vector} Acceleration of the particle*/
+    /** Acceleration of the particle*/
     this.acc = createVector(0, 0);
 
-    /** @var {Number} Radius of the particle*/
+    /** Radius of the particle*/
     this.r = 8;
   }
 
   /** 
-   * @desc Function to apply a given force to the particle
+   * Function to apply a given force to the particle
    * @param {p5.Vector} force Force to be applied
    */
   applyForce(force) {
@@ -26,7 +29,7 @@ class Particle extends p5.Vector {
   }
 
   /** 
-   * @desc Collision detection function. Makes the particle bounce back when hitting the edges
+   * Collision detection function. Makes the particle bounce back when hitting the edges
    */
   edges() {
     if (this.y >= height - this.r) {
@@ -52,7 +55,7 @@ class Particle extends p5.Vector {
   }
 
   /** 
-   * @desc Function to add drag to a particle, making it slow down
+   * Function to add drag to a particle, making it slow down
    */
   drag() {
     // Make a copy of the velocity
@@ -69,7 +72,7 @@ class Particle extends p5.Vector {
   }
 
   /** 
-   * @desc Function to update a particle's position
+   * Function to update a particle's position
    */
   update() {
     this.vel.add(this.acc);

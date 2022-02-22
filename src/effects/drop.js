@@ -1,25 +1,30 @@
+//////////////////////////////////////////////////////////////////////////////////////////
+// Credit to Coding Train: https://thecodingtrain.com/CodingChallenges/004-purplerain.html
+//////////////////////////////////////////////////////////////////////////////////////////
+
+
 /** 
- * @desc Drop Class which is used to create rain
+ * Drop Class which is used to create rain
  */
 class Drop extends Particle {
     constructor() {
-        super(random(-100, width - 100), random(-500, -50))
+        super(random(-200, width - 200), random(-500, -50))
 
-        /** @var {Number} z position of the rain*/
+        /** z position of the rain*/
         this.z = random(0, 20);
 
-        /** @var {Number} Length of the drop based on the distance z*/
+        /** Length of the drop based on the distance z*/
         this.len = map(this.z, 0, 20, 5, 10);
 
-        /** @var {p5.Vector} Speed at which the drop falls, closer drops fall faster*/
+        /** Speed at which the drop falls, closer drops fall faster*/
         this.vel = createVector(map(this.z, 0, 20, 1, 10), map(this.z, 0, 20, 1, 20))
 
-        /** @var {p5.Color} Color of each drop*/
+        /** Color of each drop*/
         this.color = color(random(255), random(255), random(255))
     }
 
     /** 
-     * @desc Function to update the drop
+     * Function to update the drop
      */
     update() {
         // Apply gravity
@@ -34,24 +39,7 @@ class Drop extends Particle {
     }
 
     /** 
-     * @desc Function to detect when a drop is off screen
-     */
-    edges() {
-        if (this.y > height) {
-            this.x = random(width);
-            this.y = random(-500, -50);
-            this.vel.y = map(this.z, 0, 20, 4, 10);
-            return;
-        }
-        if (this.x > width) {
-            this.x = random(width);
-            this.y = random(-500, -50);
-            this.vel.x = map(this.z, 0, 20, 1, 10);
-            return;
-        }
-    }
-    /** 
-     * @desc Function to show the drop of rain
+     * Function to show the drop of rain
      */
     show() {
         let thick = map(this.z, 0, 20, 1, 3);

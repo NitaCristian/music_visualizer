@@ -1,23 +1,23 @@
 /** 
- * @desc Class used to add a Video Bar control to the screen
+ * Class used to add a Video Bar control to the screen
  */
 class VideoBar {
     constructor() {
-        /** @var {Number} x coordinate of the video bar*/
+        /** x coordinate of the video bar*/
         this.x = 20
 
-        /** @var {Number} y coordinate of the video bar*/
+        /** y coordinate of the video bar*/
         this.y = height - 100
 
-        /** @var {Number} width of the video bar*/
+        /** width of the video bar*/
         this.width = width - 40
 
-        /** @var {Nubmer} height of the video bar*/
+        /** height of the video bar*/
         this.height = 10
     }
 
     /** 
-     * @desc Function to draw the video bar
+     * Function to draw the video bar
      */
     draw() {
         strokeWeight(0.8)
@@ -33,7 +33,7 @@ class VideoBar {
     }
 
     /** 
-     * @desc Function to check if the user has touched the video bar. 
+     * Function to check if the user has touched the video bar. 
      *       Used to jump to that position in the song
      */
     hitCheck() {
@@ -44,7 +44,7 @@ class VideoBar {
     };
 
     /** 
-     * @desc Function which handles any resize of the canvas
+     * Function which handles any resize of the canvas
      */
     onResize() {
         this.y = height - 100

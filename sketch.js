@@ -1,32 +1,29 @@
-// Polish everything, better resize
-// Improve radio,file structure, all visuals
-// Comments on: radio, mystify, equalizer(credit), more credits, 
-// Progress log, testing?, 
-// hide HUD
-// better comments
-// better pix waves, add some background
-// radio
-// refactor for performance
-// refactor particle
-// drag and drop song
-// changin vis bug error to pix waves
-// make rain and remove drop when out of bounds
-/** @var {ControlsAndInput} Handles controls and input from the user */
+// Polish everything
+// Credits
+// Progress log, testing 
+// Performance
+// Drag and Drop song
+// Particle
+// Radio
+// Pixelated Waves - background
+// Effects - refactor and simplify
+
+/** Handles controls and input from the user */
 let controls = null;
 
-/** @var {VisualisationsContainer} Container to store visualisations in */
+/** Container to store visualisations in */
 let visContainer = null;
 
-/** @var {p5.Sound} Store the current song */
+/** Store the current song */
 let song = null;
 
-/** @var {p5.FFT} Object to analyze the song */
+/** Object to analyze the song */
 let fourier = null;
 
-/** @var {number} Default volume of the song*/
+/** Default volume of the song*/
 let volume = 0.2;
 
-/** @var {Array} List of all songs available*/
+/** List of all songs available*/
 let songList = [
 	'Persona-5-Last-Surprise.mp3',
 	'songname.mp3',
@@ -40,28 +37,28 @@ let songList = [
 	'stomper_reggae_bit.mp3',
 ];
 
-/** @var {Number} Index of the song from the songList array*/
+/** Index of the song from the songList array*/
 let songIndex = 0;
 
-/** @var {Array} Array of amplitude peaks of the song*/
+/** Array of amplitude peaks of the song*/
 let peaks = [];
 
-/** @var {type}  Represents a second instance of p5 where the canvas is 3D*/
+/** Represents a second instance of p5 where the canvas is 3D*/
 let myp5 = null;
 
-/** @var {p5.Element} p5.Element which holds the 2D canvas*/
+/** p5.Element which holds the 2D canvas*/
 let twoD_canvas;
 
-/** @var {p5.Element} p5.Element which holds the 3D canvas*/
+/** p5.Element which holds the 3D canvas*/
 let threeD_canvas;
 
-/** @var {Boolean} Flag to tell if the current visualization is 3D */
+/** Flag to tell if the current visualization is 3D */
 let is3D = false;
 
-/** @var {Boolean} Flag to keep track of whether the audio is muted*/
+/** Flag to keep track of whether the audio is muted*/
 let mute = false;
 
-/** @var {Number} Opacity set by every visualisation*/
+/**Opacity set by every visualisation*/
 let opacity = 255
 
 function preload() {
@@ -70,8 +67,7 @@ function preload() {
 }
 
 /**
- * @desc Callback function called after a song is loaded
- * @returns {Array} Returns an array of amplitude peaks
+ * Callback function called after a song is loaded
  */
 function loadPeaks() {
 	peaks = song.getPeaks();
@@ -87,9 +83,9 @@ function setup() {
 
 	// Create a new visualisations container and add visualisations
 	visContainer = new VisualisationsContainer();
+	visContainer.add(new Radio());
 	visContainer.add(new Spectrum());
 	visContainer.add(new Equalizer());
-	visContainer.add(new Radio());
 	visContainer.add(new Mystify());
 
 	// Create a new instance of p5 for the 3D visualizations

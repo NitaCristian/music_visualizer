@@ -1,22 +1,22 @@
 ////////////////////////////////////////////////////////////////////
 // Credit to Microsoft for creating the original Mystify ScreenSaver
 ////////////////////////////////////////////////////////////////////
-//
+
 /** 
- * @desc Mystify Visualisation
+ * Mystify Visualisation
  */
 class Mystify {
     constructor() {
-        /** @var {String} Name of the visualisation*/
+        /** Name of the visualisation*/
         this.name = "Mystify";
         // Make the visualisation use 7 points to draw shape
         this.setup(7);
-        /** @var {Starfield} Starfield object to draw stars to the canvas*/
+        /** Starfield object to draw stars to the canvas*/
         this.starField = new Starfield();
     }
 
     /** 
-     * @desc Function to add 7 points to the particles array
+     * Function to add 7 points to the particles array
      * @param {Number} points Number of points to be added
      */
     setup(points) {
@@ -28,7 +28,7 @@ class Mystify {
     }
 
     /** 
-     * @desc Function to update the particles
+     * Function to update the particles
      */
     update() {
         for (let particle of this.particles) {
@@ -39,7 +39,7 @@ class Mystify {
     }
 
     /** 
-     * @desc Function to make the particles move in different positions based on some amount
+     * Function to make the particles move in different positions based on some amount
      * @param {Number} energy The energy used to send the particles flying in some direction
      */
     shake(energy) {
@@ -64,7 +64,7 @@ class Mystify {
     }
 
     /** 
-     * @desc Function to draw the figure based on the particles array
+     * Function to draw the figure based on the particles array
      * @param {Number} distance Distance from the original point in the particles array
      */
     drawFigure(distance) {

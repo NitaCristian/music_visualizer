@@ -1,18 +1,18 @@
 
 /** 
- * @desc Container function for the visualisations
+ * Container function for the visualisations
  */
 class VisualisationsContainer {
 	constructor() {
-		/** @var {Array} Array to store visualisations*/
+		/** Array to store visualisations*/
 		this.visuals = [];
 
-		/** @var {Visualisation} The selected visualisation */
+		/** The selected visualisation */
 		this.selectedVisual = null;
 	}
 
 	/** 
-	 * @desc Add a new visualisation to the array
+	 * Add a new visualisation to the array
 	 * @param {Visualisation} newVisual A new visualisation object 
 	 */
 	add(newVisual) {
@@ -26,7 +26,7 @@ class VisualisationsContainer {
 	}
 
 	/** 
-	 * @desc Select a visualisation by name
+	 * Select a visualisation by name
 	 * @param {String} visualName A string representing the name of a visualisation
 	 */
 	selectVisual(visualName) {

@@ -1,18 +1,21 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Credit to Coding Train: https://thecodingtrain.com/learning/nature-of-code/4.2-particle-emmiters.html
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 /** 
- * @desc Emitter Class that creates a shower of particles
+ * Emitter Class that creates a shower of particles
  */
 class Emitter {
   constructor(x, y) {
-    /** @var {p5.Vector} Position of the emitter on the canvas*/
+    /** Position of the emitter on the canvas*/
     this.pos = createVector(x, y);
 
-    /** @var {Array} Array which holds all particles that will be shown*/
+    /** Array which holds all particles that will be shown*/
     this.particles = [];
   }
 
   /** 
-   * @desc Set the number of particles to be shown
+   * Set the number of particles to be shown
    * @param {Number} num Number of particles to be added
    */
   emit(num) {
@@ -22,14 +25,14 @@ class Emitter {
   }
 
   /** 
-     * @desc Function which checks if a particle's lifetime is over
+     * Function which checks if a particle's lifetime is over
      */
   finished(particle) {
     return particle.lifetime < 0;
   }
 
   /** 
-   * @desc Function to show the particles to the screen
+   * Function to show the particles to the screen
    */
   show() {
     for (let particle of this.particles) {

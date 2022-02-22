@@ -1,5 +1,5 @@
 /** 
- * @desc Class to display and handle clicks on the playback button.
+ * Class to display and handle clicks on the playback button.
  */
 class PlaybackButton extends Button {
 	constructor(x, y, w, h) {

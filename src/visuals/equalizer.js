@@ -3,14 +3,14 @@
 /////////////////////////////////////////////////////////////////////
 
 /** 
- * @desc Equalizer Visualisation
+ * Equalizer Visualisation
  */
 class Equalizer {
 	constructor() {
-		/** @var {String} Name of the current visualisation*/
+		/** Name of the current visualisation*/
 		this.name = "Circle Equalizer";
 
-		/** @var {Emitter} Emitter object which emitts a shower of particles*/
+		/** Emitter object which emitts a shower of particles*/
 		this.emitter = new Emitter(0, 0)
 	}
 
@@ -47,7 +47,7 @@ class Equalizer {
 	};
 
 	/** 
-	 * @desc Draw the peaks of the current song
+	 * Draw the peaks of the current song
 	 */
 	drawPeaks() {
 		beginShape()

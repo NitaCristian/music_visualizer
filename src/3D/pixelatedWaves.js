@@ -1,7 +1,7 @@
 class PixelatedWaves {
     constructor(sketch) {
         this.name = "Pixelated Waves";
-        /** @var {Array} Buffer that holds at most max_rows arrays which represent spectrums*/
+        /** Buffer that holds at most max_rows arrays which represent spectrums*/
         this.rows = [];
         this.max_rows = 20;
         this.sketch = sketch

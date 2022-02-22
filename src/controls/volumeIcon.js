@@ -1,5 +1,5 @@
 /** 
- * @desc Class to display a volume icon which shows the current volume
+ * Class to display a volume icon which shows the current volume
  *       and is used to mute the audio
  */
 class VolumeIcon extends Button {
@@ -8,7 +8,7 @@ class VolumeIcon extends Button {
     }
 
     /** 
-     * @desc Function which draws the icon to the canvas
+     * Function which draws the icon to the canvas
      */
     draw() {
         fill('white')

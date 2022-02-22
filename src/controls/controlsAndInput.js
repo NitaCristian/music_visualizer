@@ -1,35 +1,35 @@
 /** 
- * @desc Class to handle the onscreen medu, keyboard and mouse controls
+ * Class to handle the onscreen medu, keyboard and mouse controls
  */
 class ControlsAndInput {
 	constructor() {
-		/** @var {Boolean} Flag to determine is the visuals list should be shown*/
+		/** Flag to determine is the visuals list should be shown*/
 		this.visualsDisplayed = false;
 
-		/** @var {Boolean} Flag to determine if the song list should be shown*/
+		/** Flag to determine if the song list should be shown*/
 		this.songsDisplayed = false;
 
-		/** @var {Boolean} Flag to determine if the controls such as video bar and buttons should be shown*/
+		/** Flag to determine if the controls such as video bar and buttons should be shown*/
 		this.controlsDisplayed = false
 
-		/** @var {PlaybackButton} Button to play or pause current song*/
+		/** Button to play or pause current song*/
 		this.playbackButton = new PlaybackButton(width / 2 - 10, height - 50, 20, 20);
 
-		/** @var {VideoBar} Horisontal bar to show the length of the song and jump to specific time*/
+		/** Horisontal bar to show the length of the song and jump to specific time*/
 		this.videoBar = new VideoBar();
 
-		/** @var {NextSong} Button to change to the next song*/
+		/** Button to change to the next song*/
 		this.nextSong = new NextSong(width / 2 + 60, height - 50, 20, 20);
 
-		/** @var {PreviousSong} Button to change to the previous song*/
+		/** Button to change to the previous song*/
 		this.prevSong = new PreviousSong(width / 2 - 80, height - 50, 20, 20);
 
-		/** @var {volumeIcon} Button to show the volume of the song and mute on press*/
+		/** Button to show the volume of the song and mute on press*/
 		this.volumeIcon = new VolumeIcon(width / 2 + 120, height - 50, 20, 20);
 	}
 
 	/** 
-	 * @desc Handles the mouse moved action.
+	 * Handles the mouse moved action.
 	 */
 	mouseMoved() {
 		if (is3D) return;
@@ -42,7 +42,7 @@ class ControlsAndInput {
 	}
 
 	/** 
-	 * @desc Handle the mouse pressed on canvas action. All actions are disabled if the 3D canvas is shown
+	 * Handle the mouse pressed on canvas action. All actions are disabled if the 3D canvas is shown
 	 */
 	mousePressed() {
 		if (is3D) return;
@@ -55,7 +55,7 @@ class ControlsAndInput {
 	}
 
 	/** 
-	 * @desc Handle key pressed action.
+	 * Handle key pressed action.
 	 * @param {Number} keyCode ASCII code of the key pressed
 	 */
 	keyPressed(keyCode) {
@@ -141,7 +141,7 @@ class ControlsAndInput {
 	};
 
 	/** 
-	 * @desc Play or Pause the current audio
+	 * Play or Pause the current audio
 	 */
 	playPause() {
 		if (song.isPlaying()) {
@@ -152,7 +152,7 @@ class ControlsAndInput {
 	}
 
 	/** 
-	 * @desc Mute or Unmute the current audio
+	 * Mute or Unmute the current audio
 	 */
 	muteAudio() {
 		if (volume == 0) return;
@@ -165,7 +165,7 @@ class ControlsAndInput {
 	}
 
 	/** 
-	 * @desc Handles the change of a visualisation and showing the appropriate canvas
+	 * Handles the change of a visualisation and showing the appropriate canvas
 	 * @param {visualsContainer} visualsContainer The container that holds the visualisation that will be shown
 	 * @param {Number} index Index of the chosen visualisation 
 	 * @param {type} canvasToShow The canvas that will be displayed
@@ -180,7 +180,7 @@ class ControlsAndInput {
 	}
 
 	/** 
-	 * @desc Handles the change of a song based on an index
+	 * Handles the change of a song based on an index
 	 * @param {Number} index Index of the new song 
 	 */
 	changeSong(newIndex) {
@@ -191,7 +191,7 @@ class ControlsAndInput {
 	}
 
 	/** 
-	 * @desc Functions which draws all the controls to the screen
+	 * Functions which draws all the controls to the screen
 	 */
 	draw() {
 		// If the 3D canvas is displayed, don't resize the 2D controls
@@ -222,7 +222,7 @@ class ControlsAndInput {
 	};
 
 	/** 
-	 * @desc Function which displays the list of visualisations
+	 * Function which displays the list of visualisations
 	 */
 	showVisuals() {
 		textSize(34);
@@ -234,7 +234,7 @@ class ControlsAndInput {
 	}
 
 	/** 
-	 * @desc Function which displays the list of songs
+	 * Function which displays the list of songs
 	 */
 	showSongs() {
 		textSize(34);
@@ -246,7 +246,7 @@ class ControlsAndInput {
 	}
 
 	/** 
-	 * @desc Function which calls the resize functions of each control
+	 * Function which calls the resize functions of each control
 	 */
 	onResize() {
 		// If the 3D canvas is displayed, don't resize the 2D controls

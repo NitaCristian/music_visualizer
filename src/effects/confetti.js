@@ -1,26 +1,28 @@
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Credit to Coding Train: https://thecodingtrain.com/learning/nature-of-code/4.1-particle-system-simulation.html
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /** 
- * @desc Confetti Class used to create square particles
+ * Confetti Class used to create square particles
  */
 class Confetti extends Particle {
   constructor(x, y) {
     // Build the Confetti particle just like a normal Particle
     super(x, y)
 
-    /** @var {Number} Angle to rotate a square particle*/
+    /** Angle to rotate a square particle*/
     this.angle = random(TWO_PI);
 
-    /** @var {p5.Vector} Random direction in which a confetti particle will go*/
+    /** Random direction in which a confetti particle will go*/
     this.vel = p5.Vector.random2D()
     this.vel.mult(random(3))
 
-    /** @var {Number} Lifetime of a particle*/
+    /** Lifetime of a particle*/
     this.lifetime = 255
   }
 
   /** 
-   * @desc Function to update a confetti particle
+   * Function to update a confetti particle
    */
   update() {
     super.update()
@@ -28,7 +30,7 @@ class Confetti extends Particle {
   }
 
   /** 
-   * @desc Function to render the particle
+   * Function to render the particle
    */
   show() {
     push()

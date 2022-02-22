@@ -1,5 +1,5 @@
 /** 
- * @desc Class to add a button which switches to the previous song
+ * Class to add a button which switches to the previous song
  */
 class PreviousSong extends Button {
     constructor(x, y, w, h) {

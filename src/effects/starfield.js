@@ -1,19 +1,21 @@
+/////////////////////////////////////////////////////////////////////////////////////////
 // Credit to Coding Train: https://thecodingtrain.com/CodingChallenges/001-starfield.html
+/////////////////////////////////////////////////////////////////////////////////////////
 
 /** 
- * @desc Starfield Class used to render a stars moving from the center outwards
+ * Starfield Class used to render a stars moving from the center outwards
  */
 class Starfield {
     constructor() {
-        /** @var {Array} Array all stars */
+        /** Array all stars */
         this.stars = [];
 
-        /** @var {Number} Speed at which the stars move*/
+        /** Speed at which the stars move*/
         this.speed = 30;
     };
 
     /** 
-     * @desc Set the amount of stars that will be displayed on the screen
+     * Set the amount of stars that will be displayed on the screen
      * @param {Number} n Number of stars to be added 
      */
     set(n) {

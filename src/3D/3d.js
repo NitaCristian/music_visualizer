@@ -1,3 +1,7 @@
+// Credit to p5.js Wiki Global and instance mode ///////////////////
+// https://github.com/processing/p5.js/wiki/Global-and-instance-mode
+////////////////////////////////////////////////////////////////////
+
 const s = (sketch) => {
     sketch.visContainer = null
 

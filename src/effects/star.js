@@ -1,20 +1,24 @@
+/////////////////////////////////////////////////////////////////////////////////////////
+// Credit to Coding Train: https://thecodingtrain.com/CodingChallenges/001-starfield.html
+/////////////////////////////////////////////////////////////////////////////////////////
+
 /** 
- * @desc Star Class used to create a Starfield
+ * Star Class used to create a Starfield
  */
 class Star {
     constructor() {
-        /** @var {Number} x position of the star*/
+        /**x position of the star*/
         this.x = random(-width, width)
 
-        /** @var {Number} y position of the star*/
+        /**y position of the star*/
         this.y = random(-height, height)
 
-        /** @var {Number} z position of the star, from back to front*/
+        /**z position of the star, from back to front*/
         this.z = random(width);
     }
 
     /** 
-     * @desc Function to update the position fo the star
+     * Function to update the position fo the star
      * @param {Number} speed The speed at which the star is moving
      */
     update(speed) {
