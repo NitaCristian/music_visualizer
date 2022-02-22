@@ -3,7 +3,7 @@
  */
 class Drop extends Particle {
     constructor() {
-        super(random(width), random(-500, -50))
+        super(random(-100, width - 100), random(-500, -50))
 
         /** @var {Number} z position of the rain*/
         this.z = random(0, 20);
@@ -27,6 +27,10 @@ class Drop extends Particle {
         super.applyForce(gravity)
         super.update()
         this.vel.limit(10)
+    }
+
+    outOfBounds() {
+        return (this.y > height || this.x > width)
     }
 
     /** 

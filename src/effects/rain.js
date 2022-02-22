@@ -14,28 +14,29 @@ class Rain {
      * @param {Number} n Number of drops to be added to the drops array
      */
     drop(n) {
-        this.drops = []
+        // this.drops = []
         for (let i = 0; i < n; i++) {
-            this.drops[i] = new Drop();
+            this.drops.push(new Drop())
         }
     }
 
     draw() {
         push();
+        this.drop(1)
         // For every drop in the drops array
         for (let drop of this.drops) {
             // Update each droplet's position
             drop.update();
             // If a drop is out of bounds bring it back
-            drop.edges();
+            // drop.edges();
             // Draw the droplet onto the screen
             drop.show();
         }
-        // for (let i = this.drops.length - 1; i >= 0; i--) {
-        //     if (this.drops[i].outOfBounds()) {
-        //         this.drops.splice(i, 1)
-        //     }
-        // }
+        for (let i = this.drops.length - 1; i >= 0; i--) {
+            if (this.drops[i].outOfBounds()) {
+                this.drops.splice(i, 1)
+            }
+        }
         pop();
     }
 }

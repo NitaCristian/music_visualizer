@@ -9,7 +9,6 @@ class Spectrum {
 
 		/** @var {Rain} Rain object which renders droples falling */
 		this.rain = new Rain();
-		this.rain.drop(50)
 	}
 
 	draw() {

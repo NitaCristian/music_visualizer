@@ -1,10 +1,14 @@
 /** 
  * @desc Star Class used to create a Starfield
  */
-class Star/* extends Particle*/ {
+class Star {
     constructor() {
+        /** @var {Number} x position of the star*/
         this.x = random(-width, width)
+
+        /** @var {Number} y position of the star*/
         this.y = random(-height, height)
+
         /** @var {Number} z position of the star, from back to front*/
         this.z = random(width);
     }
@@ -14,15 +18,11 @@ class Star/* extends Particle*/ {
      * @param {Number} speed The speed at which the star is moving
      */
     update(speed) {
-        // Update z
         this.z = this.z - speed;
-        // If z is out of bounds
-        if (this.z < 1) {
-            // Reset the coordinates of the star
-            this.x = random(-width, width);
-            this.y = random(-height, height);
-            this.z = width;
-        }
+    }
+
+    outOfBounds() {
+        return this.z < 1
     }
 
     show() {
