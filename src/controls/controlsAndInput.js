@@ -225,11 +225,16 @@ class ControlsAndInput {
 	 * Function which displays the list of visualisations
 	 */
 	showVisuals() {
-		textSize(34);
-		text("Select a visualisation:", 100, 30);
-		for (let i = 0; i < visContainer.visuals.length; i++) {
-			let yLoc = 70 + i * 40;
-			text((i + 1) + ":  " + visContainer.visuals[i].name, 100, yLoc);
+		textSize(10);
+		text("Visualisations:", 0, 0);
+		let step = 0
+		for (let i = 0; i < visContainer.visuals.length; i++, step++) {
+			let yLoc = 70 + step * 40;
+			text((step + 1) + ":  " + visContainer.visuals[i].name, 100, yLoc);
+		}
+		for (let j = 0; j < myp5.visualsContainer.visuals.length; j++, step++) {
+			let yLoc = 70 + step * 40;
+			text((step + 1) + ":  " + visContainer.visuals[i].name, 100, yLoc);
 		}
 	}
 

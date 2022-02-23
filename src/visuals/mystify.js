@@ -96,8 +96,8 @@ class Mystify {
         this.setColor()
         // Draw figures
         this.drawFigure(0)
-        this.drawFigure(50)
-        this.drawFigure(-50)
+        this.drawFigure(40)
+        this.drawFigure(-40)
 
         pop();
 

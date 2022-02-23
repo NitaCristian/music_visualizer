@@ -1,13 +1,3 @@
-// Polish everything
-// Credits
-// Progress log, testing 
-// Performance
-// Drag and Drop song
-// Particle
-// Radio
-// Pixelated Waves - background
-// Effects - refactor and simplify
-
 /** Handles controls and input from the user */
 let controls = null;
 
@@ -61,9 +51,16 @@ let mute = false;
 /**Opacity set by every visualisation*/
 let opacity = 255
 
+let stylish = null
+let quig = null
+let italiano = null
+
 function preload() {
 	song = loadSound('assets/' + songList[songIndex], successCallback = loadPeaks);
 	song.setVolume(volume);
+	quig = loadFont('fonts/QUIGLEYW.TTF')
+	stylish = loadFont('fonts/Calling Angels Personal Use.ttf')
+	italiano = loadFont('fonts/Italianno-Regular.ttf')
 }
 
 /**

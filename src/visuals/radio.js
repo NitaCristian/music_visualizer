@@ -1,6 +1,7 @@
-//
+// Radio Visualisation
 class Radio {
     constructor() {
+        // Name of the visualisation
         this.name = "Radio";
 
         this.minAngle = PI + PI / 10;
@@ -10,26 +11,62 @@ class Radio {
         this.onResize();
     }
 
+
     onResize() {
+        this.half_width = width / 2
         this.pad = width / 30;
         this.dialRadius = 160;
     }
 
     draw() {
-        background('SaddleBrown')
+        background(102, 34, 0)
+        fill('SaddleBrown')
+        let p = width / 100
+        rect(p, p, width - 2 * p, height - 2 * p)
         opacity = 255
         let spectrum = fourier.analyze();
 
-        this.slider(100, height - 900, 850, 200)
-        this.dial(100, height - 600, 400, 200, "Low Mid", "lowMid")
-        this.dial(550, height - 600, 400, 200, "High Mid", "highMid")
-        this.button(300, height - 250, 80, "Volume", 'lowMid')
+
+        this.slider(
+            100,
+            70,
+            this.half_width - 2 * this.pad,
+            height / 5,
+            spectrum[0])
+        this.dial(
+            100,
+            365,
+            this.half_width / 2.5,
+            height / 5,
+            "Low Mid", "lowMid")
+        this.dial(100 + this.half_width / 2.5 + this.pad,
+            365,
+            this.half_width / 2.5,
+            height / 5,
+            "High Mid", "highMid")
+        this.button(
+            300,
+            height - 250,
+            height / 12,
+            "Volume", 'lowMid')
         this.button(500, height - 250, 70, "Bass", 'bass')
         this.button(700, height - 250, 70, "Treble", 'treble')
-        this.speaker()
+        this.speaker(spectrum[0])
+        push()
+        angleMode(DEGREES)
+        // rotate(-29)
+        textFont(stylish)
+        textSize(100)
+        fill('Black')
+        textAlign(LEFT)
+        text('Old Radio', this.half_width - 600, height - 50)
+        pop()
     }
 
-    slider(x, y, w, h) {
+    slider(x, y, w, h, test) {
+        fill(102, 34, 0)
+        rect(x - 10, y - 10, w + 20, h + 20)
+
         fill('#f0f2d2');
         rect(x, y, w, h)
 
@@ -48,46 +85,71 @@ class Radio {
         }
 
         stroke(255, 0, 0)
-        line(x + w / 2, y, x + w / 2, y + h)
+        let t = map(test, 0, 255, 10, 200)
+        line(x + w / 2 + t, y, x + w / 2 + t, y + h)
     }
     button(x, y, size, label, bin) { // IMPROVE: resizeing does not work
         fill('Gray')
         stroke('Black')
         circle(x, y, size)
 
+        push()
         fill('Black')
-        textSize(15)
-        textStyle(BOLD);
+        textSize(30)
+        textFont(italiano)
+        textStyle(NORMAL);
         textAlign(CENTER);
         text(label, x, y + 60)
+        pop()
 
         strokeWeight(2);
         stroke(255, 20, 0)
         this.needle(fourier.getEnergy(bin), x, y, size / 2)
     }
-    speaker() {
+    speaker(test) {
+
+        let x = this.half_width + this.pad
+        let y = this.pad
+        let w = this.half_width - 2 * this.pad
+        let h = height - 2 * this.pad
+
+        this.woodBack(x, y, w, h)
+
+        // Draw speaker background
         stroke('Black')
         fill('Peru')
-        let halfW = width / 2
-        rect(halfW + this.pad, this.pad, halfW - 2 * this.pad, height - 3 * this.pad)
+        rect(x, y, w, h)
 
-        let n = (halfW - 2 * this.pad) / 10
-        for (let i = 1; i <= n; i++) {
-            line(halfW + i * this.pad, this.pad, halfW + i * this.pad, height - 2 * this.pad)
+        // Draw k vertical lines of width n
+
+        let k = map(test, 0, 255, 25, 50)
+        let n = w / k
+        for (let i = 1; i <= k; i++) {
+            line(x + i * n, y, x + i * n, y + h)
         }
-        let m = (height - 3 * this.pad) / 54
-        // // console.log(m);
-        // for (let i = 1; i < m; i++) {
-        //     line(halfW + this.pad, i * this.pad, width - this.pad, i * this.pad)
-        // }
+        // Draw k horisontal lines of height m
+        let m = h / k
+        for (let i = 1; i <= k; i++) {
+            line(x, y + m * i, x + w, y + m * i)
+        }
+    }
+
+    woodBack(x, y, w, h) {
+        stroke(0)
+        fill(102, 34, 0)
+        rect(x - 10, y - 10, w + 20, h + 20)
     }
 
     dial(x, y, w, h, label, bin) {
-        stroke('Black')
+        this.woodBack(x, y, w, h)
+
         let energy = fourier.getEnergy(bin);
         push();
+        // Draw dial background
+        stroke('Black')
         fill('#f0f2d2');
         rect(x, y, w, h);
+
         this.ticks(x + w / 2, y + h, label);
         this.needle(energy, x + w / 2, y + h, this.dialRadius);
         pop();
@@ -97,7 +159,6 @@ class Radio {
         angleMode(RADIANS);
 
         push();
-        // stroke('#333333');
         translate(centreX, bottomY);
         let theta = map(energy, 0, 255, this.minAngle, this.maxAngle);
         let x = l * cos(theta);
