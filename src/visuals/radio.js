@@ -4,66 +4,58 @@ class Radio {
         // Name of the visualisation
         this.name = "Radio";
 
+        // Minimum and maximum angle of the dial's needle
         this.minAngle = PI + PI / 10;
         this.maxAngle = TWO_PI - PI / 10;
-
+        // Types of frequencies
         this.frequencyBins = ["bass", "lowMid", "highMid", "treble"];
+
         this.onResize();
     }
 
-
+    /** 
+     * Function called when the canvas resizes
+     */
     onResize() {
         this.half_width = width / 2
         this.pad = width / 30;
-        this.dialRadius = 160;
+        this.dialRadius = this.half_width / 5.5;
     }
 
+    /**
+     * Function to draw the visualisation and its different components
+     */
     draw() {
+        // Draw dark wood background
         background(102, 34, 0)
+
+        // Draw lighter wood background
         fill('SaddleBrown')
         let p = width / 100
         rect(p, p, width - 2 * p, height - 2 * p)
+
+        // Opacity set by the visualisation
         opacity = 255
         let spectrum = fourier.analyze();
 
+        // Draw items of the visualisation
+        this.slider(100, 70, this.half_width - 2 * this.pad, height / 5, spectrum[0])
 
-        this.slider(
-            100,
-            70,
-            this.half_width - 2 * this.pad,
-            height / 5,
-            spectrum[0])
-        this.dial(
-            100,
-            365,
-            this.half_width / 2.5,
-            height / 5,
-            "Low Mid", "lowMid")
-        this.dial(100 + this.half_width / 2.5 + this.pad,
-            365,
-            this.half_width / 2.5,
-            height / 5,
-            "High Mid", "highMid")
-        this.button(
-            300,
-            height - 250,
-            height / 12,
-            "Volume", 'lowMid')
-        this.button(500, height - 250, 70, "Bass", 'bass')
-        this.button(700, height - 250, 70, "Treble", 'treble')
+        this.dial(100, height / 5 + 150, this.half_width / 2.5, height / 5, "Low Mid", "lowMid")
+        this.dial(100 + this.half_width / 2.5 + this.pad, height / 5 + 150, this.half_width / 2.5, height / 5, "High Mid", "highMid")
+
+        this.button(this.half_width - this.half_width / 1.5, height / 5 + 450, height / 12, "Volume", 'lowMid')
+        this.button(this.half_width - this.half_width / 2, height / 5 + 450, 70, "Bass", 'bass')
+        this.button(this.half_width - this.half_width / 3, height / 5 + 450, 70, "Treble", 'treble')
+
         this.speaker(spectrum[0])
-        push()
-        angleMode(DEGREES)
-        // rotate(-29)
-        textFont(stylish)
-        textSize(100)
-        fill('Black')
-        textAlign(LEFT)
-        text('Old Radio', this.half_width - 600, height - 50)
-        pop()
+
+        this.logo(this.half_width - this.half_width / 1.4, height - 70)
     }
 
+
     slider(x, y, w, h, test) {
+        push()
         fill(102, 34, 0)
         rect(x - 10, y - 10, w + 20, h + 20)
 
@@ -73,7 +65,8 @@ class Radio {
         let midHeight = h / 2 + 20
         line(x, y + midHeight, x + w, y + midHeight)
 
-        for (let i = 1; i < w / 10; i++) {
+        let n = w / 10
+        for (let i = 1; i < n; i++) {
             let l = 20
             if (i % 5 == 0) {
                 l = 30
@@ -87,72 +80,22 @@ class Radio {
         stroke(255, 0, 0)
         let t = map(test, 0, 255, 10, 200)
         line(x + w / 2 + t, y, x + w / 2 + t, y + h)
-    }
-    button(x, y, size, label, bin) { // IMPROVE: resizeing does not work
-        fill('Gray')
-        stroke('Black')
-        circle(x, y, size)
-
-        push()
-        fill('Black')
-        textSize(30)
-        textFont(italiano)
-        textStyle(NORMAL);
-        textAlign(CENTER);
-        text(label, x, y + 60)
         pop()
-
-        strokeWeight(2);
-        stroke(255, 20, 0)
-        this.needle(fourier.getEnergy(bin), x, y, size / 2)
-    }
-    speaker(test) {
-
-        let x = this.half_width + this.pad
-        let y = this.pad
-        let w = this.half_width - 2 * this.pad
-        let h = height - 2 * this.pad
-
-        this.woodBack(x, y, w, h)
-
-        // Draw speaker background
-        stroke('Black')
-        fill('Peru')
-        rect(x, y, w, h)
-
-        // Draw k vertical lines of width n
-
-        let k = map(test, 0, 255, 25, 50)
-        let n = w / k
-        for (let i = 1; i <= k; i++) {
-            line(x + i * n, y, x + i * n, y + h)
-        }
-        // Draw k horisontal lines of height m
-        let m = h / k
-        for (let i = 1; i <= k; i++) {
-            line(x, y + m * i, x + w, y + m * i)
-        }
-    }
-
-    woodBack(x, y, w, h) {
-        stroke(0)
-        fill(102, 34, 0)
-        rect(x - 10, y - 10, w + 20, h + 20)
     }
 
     dial(x, y, w, h, label, bin) {
-        this.woodBack(x, y, w, h)
+        push()
+        this.woodBackgroundDark(x, y, w, h)
 
-        let energy = fourier.getEnergy(bin);
-        push();
+        let energy = fourier.getEnergy(bin)
         // Draw dial background
         stroke('Black')
-        fill('#f0f2d2');
-        rect(x, y, w, h);
+        fill('#f0f2d2')
+        rect(x, y, w, h)
 
-        this.ticks(x + w / 2, y + h, label);
-        this.needle(energy, x + w / 2, y + h, this.dialRadius);
-        pop();
+        this.ticks(x + w / 2, y + h, label)
+        this.needle(energy, x + w / 2, y + h, this.dialRadius)
+        pop()
     }
 
     needle(energy, centreX, bottomY, l) {
@@ -179,7 +122,8 @@ class Radio {
         arc(0, 0, 20, 20, PI, 2 * PI);
 
         textAlign(CENTER);
-        textSize(12);
+        textSize(25);
+        textFont(italiano)
         text(freqLabel, 0, -30);
 
         for (let i = 0; i < 9; i++) {
@@ -193,5 +137,73 @@ class Radio {
             nextTickAngle += PI / 10;
         }
         pop();
-    };
+    }
+
+    button(x, y, size, label, bin) { // IMPROVE: resizeing does not work
+        push()
+        stroke('Black')
+        fill('DarkGray')
+        circle(x, y, size + 5)
+        fill('Gray')
+        circle(x, y, size)
+
+        fill('Black')
+        textSize(30)
+        textFont(italiano)
+        textStyle(NORMAL);
+        textAlign(CENTER);
+        text(label, x, y + 65)
+
+        strokeWeight(2);
+        stroke(255, 20, 0)
+        this.needle(fourier.getEnergy(bin), x, y, size / 2)
+        pop()
+    }
+
+    speaker(energy) {
+        push()
+        let x = this.half_width + this.pad
+        let y = this.pad
+        let w = this.half_width - 2 * this.pad
+        let h = height - 2 * this.pad
+
+        this.woodBackgroundDark(x, y, w, h)
+
+        // Draw speaker background
+        stroke('Black')
+        fill('Peru')
+        rect(x, y, w, h)
+
+        // Draw k vertical lines of width n
+
+        let k = map(energy, 0, 255, 25, 50)
+        let n = w / k
+        for (let i = 1; i <= k; i++) {
+            line(x + i * n, y, x + i * n, y + h)
+        }
+        // Draw k horisontal lines of height m
+        let m = h / k
+        for (let i = 1; i <= k; i++) {
+            line(x, y + m * i, x + w, y + m * i)
+        }
+        pop()
+    }
+
+    woodBackgroundDark(x, y, w, h) {
+        push()
+        stroke(0)
+        fill(102, 34, 0)
+        rect(x - 10, y - 10, w + 20, h + 20)
+        pop()
+    }
+
+    logo(x, y) {
+        push()
+        fill('Black')
+        textFont(stylish)
+        textSize(100)
+        textAlign(LEFT)
+        text('Old Radio', x, y)
+        pop()
+    }
 }

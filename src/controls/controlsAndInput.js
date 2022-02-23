@@ -3,7 +3,10 @@
  */
 class ControlsAndInput {
 	constructor() {
-		/** Flag to determine is the visuals list should be shown*/
+		/** Flag to determine if the instructions list should be shown*/
+		this.helpDisplayed = false;
+
+		/** Flag to determine if the visuals list should be shown*/
 		this.visualsDisplayed = false;
 
 		/** Flag to determine if the song list should be shown*/
@@ -26,6 +29,22 @@ class ControlsAndInput {
 
 		/** Button to show the volume of the song and mute on press*/
 		this.volumeIcon = new VolumeIcon(width / 2 + 120, height - 50, 20, 20);
+
+		this.instructions = [
+			{ "key": "1-5", "instruction": "Change visualisations" },
+			{ "key": "P", "instruction": "Previous song" },
+			{ "key": "N", "instruction": "Next song" },
+			{ "key": "M", "instruction": "Mute audio" },
+			{ "key": "V", "instruction": "List all visualisations" },
+			{ "key": "L", "instruction": "List all songs" },
+			{ "key": "H", "instruction": "Show help menu" },
+			{ "key": "F", "instruction": "Enter of Exit fullscreen" },
+			{ "key": "Up arrow", "instruction": "Increase the volume" },
+			{ "key": "Down arrow", "instruction": "Decrease the volume" },
+			{ "key": "Left arrow", "instruction": "Skip 5 seconds backward" },
+			{ "key": "Right arrow", "instruction": "Skip 5 seconds forward" },
+			{ "key": "Spacebar", "instruction": "Play or Pause the song" },
+		]
 	}
 
 	/** 
@@ -93,7 +112,7 @@ class ControlsAndInput {
 		}
 		// H - List help instructions
 		if (keyCode == 72) {
-			// TODO
+			this.helpDisplayed = !this.helpDisplayed
 			return
 		}
 		// L - List songs
@@ -186,7 +205,7 @@ class ControlsAndInput {
 	changeSong(newIndex) {
 		songIndex = newIndex
 		song.stop();
-		song = loadSound('assets/' + songList[songIndex], successCallback = loadPeaks);
+		song = loadSound('assets/' + songList[songIndex].path, successCallback = loadPeaks);
 		song.setVolume(volume);
 	}
 
@@ -210,43 +229,92 @@ class ControlsAndInput {
 			this.volumeIcon.draw();
 		}
 
-		if (this.visualsDisplayed) {
+		if (this.visualsDisplayed) this.showVisuals(50, 200);
 
-			this.showVisuals();
-		}
+		if (this.songsDisplayed) this.showSongs(width - 500, 200)
 
-		if (this.songsDisplayed) {
-			this.showSongs()
-		}
+		if (this.helpDisplayed) this.showHelp(width / 2 - 350, 200)
+
 		pop();
 	};
+
+	/**
+	 * Function which displays the list of instructions
+	 */
+	showHelp(x, y) {
+
+		// Draw the background
+		let n = this.instructions.length
+		fill(0, 100)
+		rect(x, y - 20, 350, (n + 1) * 40)
+
+		// Draw title
+		fill(255)
+		textSize(20);
+		textAlign(LEFT)
+		text("Instructions: Press the following buttons", x, y);
+		y += 40
+
+		for (let i = 0; i < this.instructions.length; i++) {
+			let yLoc = y + i * 40;
+			text(this.instructions[i].key + ": " + this.instructions[i].instruction, x, yLoc);
+
+		}
+	}
 
 	/** 
 	 * Function which displays the list of visualisations
 	 */
-	showVisuals() {
-		textSize(10);
-		text("Visualisations:", 0, 0);
+	showVisuals(x, y) {
+		// Draw the background
+		let n = visContainer.visuals.length + myp5.visContainer.visuals.length
+		fill(0, 100)
+		rect(x, y - 20, 200, (n + 1) * 40)
+
+		// Draw title
+		fill(255)
+		textSize(20);
+		textAlign(LEFT)
+		text("Visualisations:", x, y);
+		y += 40
+
+		// Draw names of visualisations
 		let step = 0
 		for (let i = 0; i < visContainer.visuals.length; i++, step++) {
-			let yLoc = 70 + step * 40;
-			text((step + 1) + ":  " + visContainer.visuals[i].name, 100, yLoc);
+			let yLoc = y + step * 40;
+			fill(255)
+			if (visContainer.selectedVisual.name === visContainer.visuals[i].name) fill(0, 255, 0)
+			text((step + 1) + ":  " + visContainer.visuals[i].name, x, yLoc);
 		}
-		for (let j = 0; j < myp5.visualsContainer.visuals.length; j++, step++) {
-			let yLoc = 70 + step * 40;
-			text((step + 1) + ":  " + visContainer.visuals[i].name, 100, yLoc);
+		for (let j = 0; j < myp5.visContainer.visuals.length; j++, step++) {
+			let yLoc = y + step * 40;
+			fill(255)
+			text((step + 1) + ":  " + myp5.visContainer.visuals[j].name, x, yLoc);
 		}
 	}
 
 	/** 
 	 * Function which displays the list of songs
 	 */
-	showSongs() {
-		textSize(34);
+	showSongs(x, y) {
+		// Draw the background
+		let n = songList.length
+		fill(0, 100)
+		rect(x, y - 20, 450, (n + 1) * 40)
 
+		// Draw title
+		fill(255)
+		textSize(20)
+		textAlign(LEFT)
+		text("Songs:", x, y)
+		y += 40
+
+		// Draw the names of songs
 		for (let i = 0; i < songList.length; i++) {
-			let yLoc = 70 + i * 40;
-			text((i + 1) + ":  " + songList[i], 600, yLoc);
+			let yLoc = y + i * 40
+			fill(255)
+			if (songIndex == i) fill(0, 255, 0)
+			text((i + 1) + ":  " + songList[i].title, x, yLoc)
 		}
 	}
 

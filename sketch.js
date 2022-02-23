@@ -15,16 +15,16 @@ let volume = 0.2;
 
 /** List of all songs available*/
 let songList = [
-	'Persona-5-Last-Surprise.mp3',
-	'songname.mp3',
-	'INNA_Gimme_Gimme.mp3',
-	'YACHT-The-Summer-Song-Instrumental.mp3',
-	'broke_for_free_as_colorful_as_ever.mp3',
-	'mechanicus-children-of-the-omnissiah.mp3',
-	'cysmix_fright_march.mp3',
-	'persona_4_specialist.mp3',
-	'i_secretly_love_u.mp3',
-	'stomper_reggae_bit.mp3',
+	{ 'path': 'songname.mp3', 'title': 'YOASOBI - Racing Into The Night' },
+	{ 'path': 'Persona-5-Last-Surprise.mp3', 'title': 'Shoji Meguro - Last Surprise' },
+	{ 'path': 'persona_4_specialist.mp3', 'title': 'Shoji Meguro - Specialist' },
+	{ 'path': 'INNA_Gimme_Gimme.mp3', 'title': 'INNA - Gimme Gimme' },
+	{ 'path': 'cysmix_fright_march.mp3', 'title': 'Cysmix - Fright March' },
+	{ 'path': 'i_secretly_love_u.mp3', 'title': 'Snail\'s house - I secretly love u' },
+	{ 'path': 'mechanicus-children-of-the-omnissiah.mp3', 'title': 'Mechanicus 40k - Children of the Omnissiah' },
+	{ 'path': 'YACHT-The-Summer-Song-Instrumental.mp3', 'title': 'YACHT - The Summer Song Instrumental' },
+	// { 'path': 'broke_for_free_as_colorful_as_ever.mp3', 'title': '' },
+	// { 'path': 'stomper_reggae_bit.mp3', 'title': '' },
 ];
 
 /** Index of the song from the songList array*/
@@ -51,14 +51,15 @@ let mute = false;
 /**Opacity set by every visualisation*/
 let opacity = 255
 
+// Fonts
 let stylish = null
-let quig = null
+// let quig = null
 let italiano = null
 
 function preload() {
-	song = loadSound('assets/' + songList[songIndex], successCallback = loadPeaks);
+	song = loadSound('assets/' + songList[songIndex].path, successCallback = loadPeaks);
 	song.setVolume(volume);
-	quig = loadFont('fonts/QUIGLEYW.TTF')
+	// quig = loadFont('fonts/QUIGLEYW.TTF')
 	stylish = loadFont('fonts/Calling Angels Personal Use.ttf')
 	italiano = loadFont('fonts/Italianno-Regular.ttf')
 }
@@ -80,10 +81,10 @@ function setup() {
 
 	// Create a new visualisations container and add visualisations
 	visContainer = new VisualisationsContainer();
-	visContainer.add(new Radio());
 	visContainer.add(new Spectrum());
 	visContainer.add(new Equalizer());
 	visContainer.add(new Mystify());
+	visContainer.add(new Radio());
 
 	// Create a new instance of p5 for the 3D visualizations
 	myp5 = new p5(s);

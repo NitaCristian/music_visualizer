@@ -11,7 +11,7 @@ class Starfield {
         this.stars = [];
 
         /** Speed at which the stars move*/
-        this.speed = 30;
+        this.speed = 20;
     };
 
     /** 
@@ -27,7 +27,7 @@ class Starfield {
     draw() {
         push();
         // 50% chance of adding stars
-        if (random(1) < 0.5) this.set(5)
+        if (random(1) < 0.5) this.set(2)
 
         // Translate the 0,0 origin to the center of the canvas
         translate(width / 2, height / 2);
