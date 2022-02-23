@@ -32,6 +32,7 @@ class ControlsAndInput {
 
 		this.instructions = [
 			{ "key": "1-5", "instruction": "Change visualisations" },
+			{ "key": "Drop Song", "instruction": "Drop a song file and play it" },
 			{ "key": "P", "instruction": "Previous song" },
 			{ "key": "N", "instruction": "Next song" },
 			{ "key": "M", "instruction": "Mute audio" },

@@ -27,7 +27,7 @@ class Starfield {
     draw() {
         push();
         // 50% chance of adding stars
-        if (random(1) < 0.5) this.set(2)
+        if (random(1) < 0.5) this.set(5)
 
         // Translate the 0,0 origin to the center of the canvas
         translate(width / 2, height / 2);
